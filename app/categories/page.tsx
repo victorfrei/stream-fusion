@@ -19,7 +19,7 @@ export default async function Home() {
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
             20,
           ].map((e) => (
-            <button className="w-full h-44 border-2 text-2xl font-semibold border-transparent bg-gradient-to-r from-red-300 via-red-500 to-blue-700 hover:border-text cursor-pointer transition-all rounded-2xl">
+            <button className="w-full h-44 border-2 text-2xl font-semibold border-transparent bg-secondary hover:border-text cursor-pointer transition-all rounded-2xl">
               Ação
             </button>
           ))}
