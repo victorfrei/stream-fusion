@@ -22,16 +22,16 @@ export default async function AuthButton() {
       Hey, {user.email}!
       <form action={signOut}>
         <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
-          Logout
+          Sair
         </button>
       </form>
     </div>
   ) : (
     <Link
       href="/login"
-      className="py-2 px-3 flex rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
+      className="py-3 px-8 flex rounded-md no-underline bg-secondary hover:bg-secondary100"
     >
-      Login
+      Entrar
     </Link>
   );
 }

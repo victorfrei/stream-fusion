@@ -4,44 +4,10 @@ import FetchDataSteps from "@/components/tutorial/FetchDataSteps";
 import { redirect } from "next/navigation";
 import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
 import Image from "next/image";
-import { NavMenu } from "./components/NavMenu";
 
-// async function SpotlightMovie() {
-//   const options = {
-//     method: "GET",
-//     headers: {
-//       accept: "application/json",
-//       Authorization:
-//         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MDc4ODFlOGJhODU3YjU1ZTJmMTY2MGFkMjBmMDUzOCIsInN1YiI6IjVhMjVhMjJlMGUwYTI2NGNjZDBlMmQ5ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S5fkr34a6GZVfInJXs81AAjRNOGAR1EN2YLXVCahuY8",
-//     },
-//   };
-//   const response = await fetch(
-//     "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc&year=2024",
-//     options
-//   );
-//   const movies = await response.json();
-
-//   return movies.results[0];
-// }
-
-async function PopularMovies() {
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MDc4ODFlOGJhODU3YjU1ZTJmMTY2MGFkMjBmMDUzOCIsInN1YiI6IjVhMjVhMjJlMGUwYTI2NGNjZDBlMmQ5ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S5fkr34a6GZVfInJXs81AAjRNOGAR1EN2YLXVCahuY8",
-    },
-  };
-
-  const response = await fetch(
-    "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=pt-BR&page=1&sort_by=popularity.desc",
-    options
-  );
-  const movies = await response.json();
-
-  return movies.results;
-}
+import LogoWithoutText from "@/assets/LogoWithoutText.svg";
+import Link from "next/link";
+import { NavMenu } from "@/components/NavMenu";
 
 async function PopularTVShows() {
   const options = {
@@ -63,11 +29,7 @@ async function PopularTVShows() {
 }
 export default async function Home() {
   const supabase = createClient();
-  const movies = await PopularMovies();
   const tvShows = await PopularTVShows();
-
-  const content = [...movies, ...tvShows];
-
   // const spotlightMovie = await SpotlightMovie();
   const {
     data: { user },
@@ -75,8 +37,8 @@ export default async function Home() {
 
   return (
     <>
-      <div className="flex-1 w-full flex flex-col gap-10 items-center">
-        <NavMenu active={0}/>
+      <div className="flex-1 w-full flex flex-col gap-20 items-center">
+        <NavMenu active={3} />
 
         <div className="animate-in w-full flex-1 flex flex-col gap-20 opacity-0 px-20">
           <main className="flex-1 w-full flex flex-col justify-start gap-20">
@@ -85,19 +47,19 @@ export default async function Home() {
                 <Image
                   src={
                     "https://image.tmdb.org/t/p/original/" +
-                    movies[0].poster_path
+                    tvShows[0].poster_path
                   }
-                  alt={movies[0].title}
+                  alt={tvShows[0].title}
                   width={200}
                   height={200}
                   className="w-52 h-64 left-slide-in object-cover object-right-top bg-secondary100  rounded-2xl"
                 ></Image>
                 <div className="flex flex-col justify-start items-start gap-5 transition-all">
-                  <h1 className="text-3xl font-bold left-slide-in">
-                    {movies[0].title}
+                  <h1 className="text-start text-3xl font-bold left-slide-in">
+                    {tvShows[0].title || tvShows[0].name}
                   </h1>
-                  <p className="text-sm font-medium text-textSecondary left-slide-in">
-                    {movies[0].overview}
+                  <p className="text-start text-sm font-medium text-textSecondary left-slide-in">
+                    {tvShows[0].overview}
                   </p>
                   <div className="flex gap-4">
                     <div className="px-2 py-1 text-sm bg-accent rounded-lg left-slide-in group-focus:block transition-all ">
@@ -115,9 +77,9 @@ export default async function Home() {
               <Image
                 src={
                   "https://image.tmdb.org/t/p/original/" +
-                  movies[0].backdrop_path
+                  tvShows[0].backdrop_path
                 }
-                alt={movies[0].title}
+                alt={tvShows[0].title}
                 width={2000}
                 height={600}
                 className="h-[550px] object-cover object-right-top bg-secondary100  rounded-2xl"
@@ -128,7 +90,7 @@ export default async function Home() {
                 Recomendados
               </h2>
               <div className="grid grid-cols-6 gap-x-10 gap-y-20">
-                {content.map((e: any) => (
+                {tvShows.map((e: any) => (
                   <button className="flex flex-col justify-center items-start group ">
                     <Image
                       key={e.title}
