@@ -9,24 +9,6 @@ import LogoWithoutText from "@/assets/LogoWithoutText.svg";
 import Link from "next/link";
 import { NavMenu } from "@/components/NavMenu";
 
-// async function SpotlightMovie() {
-//   const options = {
-//     method: "GET",
-//     headers: {
-//       accept: "application/json",
-//       Authorization:
-//         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MDc4ODFlOGJhODU3YjU1ZTJmMTY2MGFkMjBmMDUzOCIsInN1YiI6IjVhMjVhMjJlMGUwYTI2NGNjZDBlMmQ5ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S5fkr34a6GZVfInJXs81AAjRNOGAR1EN2YLXVCahuY8",
-//     },
-//   };
-//   const response = await fetch(
-//     "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc&year=2024",
-//     options
-//   );
-//   const movies = await response.json();
-
-//   return movies.results[0];
-// }
-
 async function PopularMovies() {
   const options = {
     method: "GET",
@@ -58,7 +40,7 @@ export default async function Home() {
   return (
     <>
       <div className="flex-1 w-full flex flex-col gap-20 items-center">
-        <NavMenu active={2} />
+        <NavMenu active={1} />
 
         <div className="animate-in w-full flex-1 flex flex-col gap-20 opacity-0 px-20">
           <main className="flex-1 w-full flex flex-col justify-start gap-20">

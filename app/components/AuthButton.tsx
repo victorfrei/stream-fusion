@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import {ArrowLeftEndOnRectangleIcon, ArrowRightEndOnRectangleIcon} from  "@heroicons/react/24/outline"
 
 export default async function AuthButton() {
   const supabase = createClient();
@@ -21,17 +22,17 @@ export default async function AuthButton() {
     <div className="flex items-center gap-4">
       Hey, {user.email}!
       <form action={signOut}>
-        <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
-          Sair
+        <button className="py-2 px-8 gap-1 flex font-semibold rounded-md no-underline bg-accent hover:bg-accent/90">
+          <ArrowRightEndOnRectangleIcon width={20} height={20} strokeWidth={2}/> Sair
         </button>
       </form>
     </div>
   ) : (
     <Link
       href="/login"
-      className="py-3 px-8 flex rounded-md no-underline bg-secondary hover:bg-secondary100"
+      className="py-2 px-8 gap-1 flex font-semibold rounded-md no-underline bg-accent hover:bg-accent/90"
     >
-      Entrar
+      <ArrowLeftEndOnRectangleIcon width={20} height={20} strokeWidth={2}/> Entrar
     </Link>
   );
 }

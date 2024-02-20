@@ -38,7 +38,7 @@ export default async function Home() {
   return (
     <>
       <div className="flex-1 w-full flex flex-col gap-20 items-center">
-        <NavMenu active={3} />
+        <NavMenu active={2} />
 
         <div className="animate-in w-full flex-1 flex flex-col gap-20 opacity-0 px-20">
           <main className="flex-1 w-full flex flex-col justify-start gap-20">
@@ -79,7 +79,7 @@ export default async function Home() {
                   "https://image.tmdb.org/t/p/original/" +
                   tvShows[0].backdrop_path
                 }
-                alt={tvShows[0].title}
+                alt={tvShows[0].title || tvShows[0].name}
                 width={2000}
                 height={600}
                 className="h-[550px] object-cover object-right-top bg-secondary100  rounded-2xl"
@@ -97,7 +97,7 @@ export default async function Home() {
                       src={
                         "https://image.tmdb.org/t/p/original/" + e.poster_path
                       }
-                      alt={e.title}
+                      alt={e.title || e.name}
                       width={400}
                       height={400}
                       className=" w-80 h-96 bg-secondary100  rounded-md border-2 border-transparent hover:border-text cursor-pointer group-focus:!rounded-t-md group-focus:!rounded-b-none"

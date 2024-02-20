@@ -60,7 +60,7 @@ export default function Login({
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-lg justify-center gap-2 overflow-hidden">
       <Link
         href="/"
-        className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
+        className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline font-semibold text-text bg-accent hover:bg-accent/90 flex items-center group text-sm"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +69,7 @@ export default function Login({
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="3"
           strokeLinecap="round"
           strokeLinejoin="round"
           className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
@@ -79,7 +79,7 @@ export default function Login({
         Voltar
       </Link>
 
-      <form className="animate-in bg-btn-background flex flex-col w-full justify-center rounded-xl p-10 gap-16 text-foreground">
+      <form className="animate-in bg-btn-background flex flex-col w-full justify-center rounded-3xl shadow-xl border border-gray-700/20 p-10 gap-16 text-foreground">
         <div className="flex justify-center items-center">
           <Image src={Logo} alt="Stream Fusion Logo" width={250} height={250} />
         </div>

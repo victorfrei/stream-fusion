@@ -22,7 +22,7 @@ export default async function Home() {
   return (
     <>
       <div className="flex-1 w-full flex flex-col gap-20 items-center">
-        <NavMenu active={4} />
+        <NavMenu active={3} />
 
         <div className="animate-in w-full flex-1 flex flex-col gap-20 opacity-0 px-20">
           <main className="flex-1 w-full flex flex-col justify-start gap-20">

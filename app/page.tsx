@@ -76,11 +76,13 @@ export default async function Home() {
   return (
     <>
       <div className="flex-1 w-full flex flex-col gap-10 items-center">
-        <NavMenu active={0}/>
+        <NavMenu active={0} />
 
         <div className="animate-in w-full flex-1 flex flex-col gap-20 opacity-0 px-20">
           <main className="flex-1 w-full flex flex-col justify-start gap-20">
-            <button className="relative overflow-hidden border-2 border-transparent hover:border-text cursor-pointer transition-all rounded-2xl group">
+            {/* Spotlight */}
+
+            <button className="h-96 relative overflow-hidden border-2 border-transparent hover:border-text cursor-pointer transition-all rounded-2xl group">
               <div className="absolute flex justify-start items-center gap-10 px-20 z-10 w-full h-full bg-gradient-to-r from-black  to-black/20 rounded-2xl">
                 <Image
                   src={
@@ -93,20 +95,20 @@ export default async function Home() {
                   className="w-52 h-64 left-slide-in object-cover object-right-top bg-secondary100  rounded-2xl"
                 ></Image>
                 <div className="flex flex-col justify-start items-start gap-5 transition-all">
-                  <h1 className="text-3xl font-bold left-slide-in">
+                  <h1 className="text-3xl text-start font-bold left-slide-in">
                     {movies[0].title}
                   </h1>
-                  <p className="text-sm font-medium text-textSecondary left-slide-in">
+                  <p className="text-sm max-w-md text-start font-medium text-textSecondary left-slide-in">
                     {movies[0].overview}
                   </p>
-                  <div className="flex gap-4">
-                    <div className="px-2 py-1 text-sm bg-accent rounded-lg left-slide-in group-focus:block transition-all ">
+                  <div className="flex gap-2">
+                    <div className="px-2 py-1 text-sm font-medium text-textSecondary bg-secondary100 rounded-md left-slide-in group-focus:block transition-all ">
                       Em Alta
                     </div>
-                    <div className="px-2 py-1 text-sm bg-accent rounded-lg left-slide-in group-focus:block transition-all ">
+                    <div className="px-2 py-1 text-sm font-medium text-textSecondary bg-secondary100 rounded-md left-slide-in group-focus:block transition-all ">
                       Popular
                     </div>
-                    <div className="px-2 py-1 text-sm bg-accent rounded-lg left-slide-in group-focus:block transition-all ">
+                    <div className="px-2 py-1 text-sm font-medium text-textSecondary bg-secondary100 rounded-md left-slide-in group-focus:block transition-all ">
                       Recomendado
                     </div>
                   </div>
@@ -123,27 +125,33 @@ export default async function Home() {
                 className="h-[550px] object-cover object-right-top bg-secondary100  rounded-2xl"
               ></Image>
             </button>
+
+            {/* Spotlight End */}
+
             <div className="flex flex-col justify-center items-start gap-5">
-              <h2 className="font-bold text-3xl mb-4 text-textSecondary">
+              <h2 className="font-semibold text-2xl mb-4 text-textSecondary">
                 Recomendados
               </h2>
-              <div className="grid grid-cols-6 gap-x-10 gap-y-20">
+              <div className="grid md:grid-cols-4 lg:grid-cols-6 flex-wrap lg:gap-x-10 lg:gap-y-10">
                 {content.map((e: any) => (
-                  <button className="flex flex-col justify-center items-start group ">
-                    <Image
-                      key={e.title}
-                      src={
-                        "https://image.tmdb.org/t/p/original/" + e.poster_path
-                      }
-                      alt={e.title}
-                      width={400}
-                      height={400}
-                      className=" w-80 h-96 bg-secondary100  rounded-md border-2 border-transparent hover:border-text cursor-pointer group-focus:!rounded-t-md group-focus:!rounded-b-none"
-                    ></Image>
-                    <h1 className="w-full h-full text-start pt-4 opacity-0 group-hover:opacity-100 group-focus:opacity-100 group-focus:bg-secondary100">
+                  <div className="flex flex-col justify-center items-start group ">
+                    <button className="rounded-lg border-2 border-transparent hover:border-text cursor-pointer group-focus:!rounded-t-md group-focus:!rounded-b-none">
+                      <Image
+                        key={e.title}
+                        src={
+                          "https://image.tmdb.org/t/p/original/" + e.poster_path
+                        }
+                        alt={e.title}
+                        width={400}
+                        height={400}
+                        loading="lazy"
+                        className=" w-80 bg-secondary100 rounded-lg "
+                      ></Image>
+                    </button>
+                    <h1 className="w-full h-full font-semibold text-start pt-4 opacity-0 group-hover:opacity-100 group-focus:opacity-100 group-focus:bg-secondary100">
                       {e.title || e.name}
                     </h1>
-                  </button>
+                  </div>
                 ))}
               </div>
             </div>
