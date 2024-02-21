@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Inter, Fredoka } from "next/font/google";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" className={inter.className +"dark"}>
+    <html lang="pt-BR" className={inter.className}>
       <body className="bg-background text-text">
         <main className="min-h-screen flex flex-col items-center">
           {children}

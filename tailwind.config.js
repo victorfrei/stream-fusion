@@ -27,10 +27,7 @@ module.exports = {
         accent:"#D62828",
         text:"#FFFBFF",
         textSecondary:"#ABABAB",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
+        primary:"#FFFBFF",
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",

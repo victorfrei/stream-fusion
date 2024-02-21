@@ -1,30 +1,27 @@
-import AuthButton from "@/components/AuthButton";
+"use server";
+
 import { createClient } from "@/utils/supabase/server";
-import FetchDataSteps from "@/components/tutorial/FetchDataSteps";
-import { redirect } from "next/navigation";
-import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
 import Image from "next/image";
 import { NavMenu } from "./components/NavMenu";
+import {
+  CalendarDaysIcon,
+  FireIcon,
+  LanguageIcon,
+  PlayIcon,
+  PlusIcon,
+} from "@heroicons/react/24/outline";
+import { Spotlight } from "./components/Spotlight";
+import { ContentGrid } from "./components/ContentGrid";
 
-// async function SpotlightMovie() {
-//   const options = {
-//     method: "GET",
-//     headers: {
-//       accept: "application/json",
-//       Authorization:
-//         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MDc4ODFlOGJhODU3YjU1ZTJmMTY2MGFkMjBmMDUzOCIsInN1YiI6IjVhMjVhMjJlMGUwYTI2NGNjZDBlMmQ5ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S5fkr34a6GZVfInJXs81AAjRNOGAR1EN2YLXVCahuY8",
-//     },
-//   };
-//   const response = await fetch(
-//     "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc&year=2024",
-//     options
-//   );
-//   const movies = await response.json();
+const shuffle = (array: string[]) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
 
-//   return movies.results[0];
-// }
-
-async function PopularMovies() {
+async function TrendingMovies() {
   const options = {
     method: "GET",
     headers: {
@@ -35,7 +32,77 @@ async function PopularMovies() {
   };
 
   const response = await fetch(
-    "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=pt-BR&page=1&sort_by=popularity.desc",
+    "https://api.themoviedb.org/3/trending/all/day?language=pt-BR",
+    options
+  );
+  const movies = await response.json();
+
+  return movies.results.filter((e: any) => e.media_type == "movies" || "tv");
+}
+
+export async function ContentDetails(contentId: number) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MDc4ODFlOGJhODU3YjU1ZTJmMTY2MGFkMjBmMDUzOCIsInN1YiI6IjVhMjVhMjJlMGUwYTI2NGNjZDBlMmQ5ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S5fkr34a6GZVfInJXs81AAjRNOGAR1EN2YLXVCahuY8",
+    },
+  };
+
+  if (contentId) {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${contentId}?language=pt-BR`,
+      options
+    );
+    const movies = await response.json();
+
+    return movies;
+  } else {
+    return [];
+  }
+}
+
+export async function GetHomePageContent(page: number = 1) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MDc4ODFlOGJhODU3YjU1ZTJmMTY2MGFkMjBmMDUzOCIsInN1YiI6IjVhMjVhMjJlMGUwYTI2NGNjZDBlMmQ5ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S5fkr34a6GZVfInJXs81AAjRNOGAR1EN2YLXVCahuY8",
+    },
+  };
+
+  const movies = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=${page}&sort_by=popularity.desc`,
+    options
+  );
+  const tvShows = await fetch(
+    `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=${page}&sort_by=popularity.desc`,
+    options
+  );
+
+  const moviesContent = await movies.json();
+
+  const tvShowsContent = await tvShows.json();
+
+  const content = [...moviesContent.results, ...tvShowsContent.results];
+
+  return shuffle(content);
+}
+
+export async function GetMovies(page: number = 1) {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MDc4ODFlOGJhODU3YjU1ZTJmMTY2MGFkMjBmMDUzOCIsInN1YiI6IjVhMjVhMjJlMGUwYTI2NGNjZDBlMmQ5ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S5fkr34a6GZVfInJXs81AAjRNOGAR1EN2YLXVCahuY8",
+    },
+  };
+
+  const response = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=${page}&sort_by=popularity.desc`,
     options
   );
   const movies = await response.json();
@@ -43,7 +110,7 @@ async function PopularMovies() {
   return movies.results;
 }
 
-async function PopularTVShows() {
+export async function GetTvShows(page: number = 1) {
   const options = {
     method: "GET",
     headers: {
@@ -54,113 +121,57 @@ async function PopularTVShows() {
   };
 
   const response = await fetch(
-    "https://api.themoviedb.org/3/tv/popular?language=pt-BR&page=1",
+    `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=${page}&sort_by=popularity.desc`,
     options
   );
   const tvShows = await response.json();
-
   return tvShows.results;
 }
+
 export default async function Home() {
   const supabase = createClient();
-  const movies = await PopularMovies();
-  const tvShows = await PopularTVShows();
+  const TrendingContent = await TrendingMovies();
+  const content = await GetHomePageContent(1);
 
-  const content = [...movies, ...tvShows];
-
-  // const spotlightMovie = await SpotlightMovie();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
 
   return (
     <>
-      <div className="flex-1 w-full flex flex-col gap-10 items-center">
+      <div className="w-full flex flex-col gap-10 items-center">
         <NavMenu active={0} />
 
-        <div className="animate-in w-full flex-1 flex flex-col gap-20 opacity-0 px-20">
+        <div className="animate-in w-full flex-1 flex flex-col pb-10 gap-20 opacity-0">
           <main className="flex-1 w-full flex flex-col justify-start gap-20">
             {/* Spotlight */}
 
-            <button className="h-96 relative overflow-hidden border-2 border-transparent hover:border-text cursor-pointer transition-all rounded-2xl group">
-              <div className="absolute flex justify-start items-center gap-10 px-20 z-10 w-full h-full bg-gradient-to-r from-black  to-black/20 rounded-2xl">
-                <Image
-                  src={
-                    "https://image.tmdb.org/t/p/original/" +
-                    movies[0].poster_path
-                  }
-                  alt={movies[0].title}
-                  width={200}
-                  height={200}
-                  className="w-52 h-64 left-slide-in object-cover object-right-top bg-secondary100  rounded-2xl"
-                ></Image>
-                <div className="flex flex-col justify-start items-start gap-5 transition-all">
-                  <h1 className="text-3xl text-start font-bold left-slide-in">
-                    {movies[0].title}
-                  </h1>
-                  <p className="text-sm max-w-md text-start font-medium text-textSecondary left-slide-in">
-                    {movies[0].overview}
-                  </p>
-                  <div className="flex gap-2">
-                    <div className="px-2 py-1 text-sm font-medium text-textSecondary bg-secondary100 rounded-md left-slide-in group-focus:block transition-all ">
-                      Em Alta
-                    </div>
-                    <div className="px-2 py-1 text-sm font-medium text-textSecondary bg-secondary100 rounded-md left-slide-in group-focus:block transition-all ">
-                      Popular
-                    </div>
-                    <div className="px-2 py-1 text-sm font-medium text-textSecondary bg-secondary100 rounded-md left-slide-in group-focus:block transition-all ">
-                      Recomendado
-                    </div>
-                  </div>
-                </div>
+            <Spotlight contentArray={TrendingContent} />
+
+            <div className="flex flex-col gap-4 px-20">
+              <div className="flex gap-4">
+                <button className="px-8 py-2 bg-secondary rounded-md text-base font-semibold">
+                  Filmes
+                </button>
+                <button className="px-8 py-2 bg-secondary rounded-md text-base font-semibold">
+                  Séries
+                </button>
               </div>
-              <Image
-                src={
-                  "https://image.tmdb.org/t/p/original/" +
-                  movies[0].backdrop_path
-                }
-                alt={movies[0].title}
-                width={2000}
-                height={600}
-                className="h-[550px] object-cover object-right-top bg-secondary100  rounded-2xl"
-              ></Image>
-            </button>
-
-            {/* Spotlight End */}
-
-            <div className="flex flex-col justify-center items-start gap-5">
-              <h2 className="font-semibold text-2xl mb-4 text-textSecondary">
-                Recomendados
-              </h2>
-              <div className="grid md:grid-cols-4 lg:grid-cols-6 flex-wrap lg:gap-x-10 lg:gap-y-10">
-                {content.map((e: any) => (
-                  <div className="flex flex-col justify-center items-start group ">
-                    <button className="rounded-lg border-2 border-transparent hover:border-text cursor-pointer group-focus:!rounded-t-md group-focus:!rounded-b-none">
-                      <Image
-                        key={e.title}
-                        src={
-                          "https://image.tmdb.org/t/p/original/" + e.poster_path
-                        }
-                        alt={e.title}
-                        width={400}
-                        height={400}
-                        loading="lazy"
-                        className=" w-80 bg-secondary100 rounded-lg "
-                      ></Image>
-                    </button>
-                    <h1 className="w-full h-full font-semibold text-start pt-4 opacity-0 group-hover:opacity-100 group-focus:opacity-100 group-focus:bg-secondary100">
-                      {e.title || e.name}
-                    </h1>
-                  </div>
-                ))}
+              <div className="flex gap-4">
+                <button className="px-8 py-2 bg-secondary rounded-md text-base font-semibold">
+                  Filmes
+                </button>
+                <button className="px-8 py-2 bg-secondary rounded-md text-base font-semibold">
+                  Séries
+                </button>
               </div>
             </div>
+
+            <ContentGrid title="Em Alta" contentArray={content} />
+           
           </main>
         </div>
 
-        <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
+        {/* <footer className="w-full px-8 py-2 flex justify-center text-center text-sm font-semibold">
           <p>Powered by Stream Fusion © 2024</p>
-        </footer>
+        </footer> */}
       </div>
     </>
   );
