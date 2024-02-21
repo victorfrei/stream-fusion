@@ -3,23 +3,34 @@
 import { FireIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { LoadingIndicator } from "./LoadingIndicator";
+import { useRouter } from "next/navigation";
 
 export function ContentGrid({
   title,
   contentArray,
 }: {
-  title: string;
+  title?: string;
   contentArray: any;
 }) {
+  const router = useRouter();
+
   return (
     <div className="flex flex-col justify-center items-start gap-20 px-20">
-      <h2 className="flex gap-4 justify-center items-center font-semibold text-2xl text-textSecondary">
-        <FireIcon width={30} height={30} strokeWidth={2} /> <p>{title}</p>
-      </h2>
+      {title && (
+        <h2 className="flex gap-4 justify-center items-center font-semibold text-2xl text-textSecondary">
+          <FireIcon width={30} height={30} strokeWidth={2} />
+          <p>{title}</p>
+        </h2>
+      )}
       <div className="grid md:grid-cols-4 lg:grid-cols-6 lg:gap-x-10 lg:gap-y-10">
         {contentArray.map((e: any) => (
+
+
           <div className="flex flex-col group">
-            <button className="w-[250px] h-[360px] rounded-lg border-2 border-transparent hover:border-text cursor-pointer group-focus:!rounded-t-md group-focus:!rounded-b-none">
+            <button
+              onClick={() => {router.push(`/details/${e.media_type}/${e.id}`); console.log(e)}}
+              className="w-[250px] h-[360px] rounded-lg border-2 border-transparent hover:border-text cursor-pointer group-focus:!rounded-t-md group-focus:!rounded-b-none"
+            >
               <Image
                 key={e.title}
                 src={"https://image.tmdb.org/t/p/original/" + e.poster_path}

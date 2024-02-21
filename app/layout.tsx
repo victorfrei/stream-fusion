@@ -1,5 +1,6 @@
 import { Inter, Fredoka } from "next/font/google";
 import "./globals.css";
+import "plyr-react/plyr.css"
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -11,7 +12,10 @@ export const metadata = {
   description: "Sua pesquisa na velocidade da sua vontade",
 };
 
-const inter = Inter({weight: ["100","200","300","400","500","600","700","800","900"], subsets: ["latin"]})
+const inter = Inter({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+});
 
 export default function RootLayout({
   children,

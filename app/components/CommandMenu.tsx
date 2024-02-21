@@ -36,7 +36,8 @@ const menuItems = [
 
 export function CommandMenu() {
   const [open, setOpen] = React.useState(false);
-  const isMac = navigator.userAgent.toUpperCase().indexOf("MAC") !== -1;
+  // navigator?.userAgent.toUpperCase().indexOf("MAC") !== -1;
+  const isMac = false;
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -53,7 +54,7 @@ export function CommandMenu() {
     <div>
       <button
         onClick={() => setOpen((open) => !open)}
-        className="flex gap-4 justify-between items-center text-sm font-semibold py-2 px-4 bg-secondary border border-white/20 rounded-lg"
+        className="flex gap-4 justify-between items-center text-sm font-semibold py-2 px-4 hover:bg-secondary rounded-lg"
       >
         <div className="flex gap-2">
           <MagnifyingGlassIcon strokeWidth={2} width={20} height={20} />

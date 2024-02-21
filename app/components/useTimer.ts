@@ -3,8 +3,8 @@ import { useCallback, useEffect, useState } from "react";
 export const useTimer = ({
   initialSeconds = 0,
   initiallyRunning = true,
-  limit = 10,
-  pageLimit = 7,
+  limit = 20,
+  pageLimit = 1,
 }: {
   initialSeconds?: number;
   initiallyRunning?: boolean;
