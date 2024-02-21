@@ -1,6 +1,5 @@
 "use client";
 
-import { ContentDetails } from "@/page";
 import {
   CalendarDaysIcon,
   FireIcon,
