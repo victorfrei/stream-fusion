@@ -14,7 +14,9 @@ import { useTimer } from "./TimeManager";
 
 export function Spotlight({ contentArray }: { contentArray: any }) {
   const [content, setContent] = useState<any>([]);
-  const { seconds, start, pause, reset, running, stop, page } = useTimer({pageLimit: contentArray.length});
+  const { seconds, start, pause, reset, running, stop, page } = useTimer({
+    pageLimit: contentArray.length - 1,
+  });
 
   useEffect(() => {
     setContent(contentArray[page]);
@@ -63,7 +65,9 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
                         height={20}
                         strokeWidth={2}
                       />{" "}
-                      {new Date(content?.release_date).getFullYear()}
+                      {new Date(
+                        content?.release_date || content?.first_air_date
+                      ).getFullYear()}
                     </p>
                   </p>
 
@@ -159,6 +163,7 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
             {/* SpotLight Content Ends */}
           </div>
           {/* Background Image */}
+          {/* Modificar Forma como as imagens são carregadas */}
           <Image
             src={
               "https://image.tmdb.org/t/p/original/" + content?.backdrop_path

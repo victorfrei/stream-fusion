@@ -40,7 +40,7 @@ import {
 
 export function NavMenu({ active }: { active: number }) {
   return (
-    <nav className="absolute z-50 top-0 w-full flex justify-center items-center pt-10 px-20">
+    <nav className="absolute z-50 top-0 w-full flex justify-center items-center pt-10 pl-20 pr-24">
       <div className="w-full flex justify-between items-center text-sm">
         <Link href={"/"} className="flex gap-4 left-slide-in">
         <Image
@@ -70,7 +70,7 @@ export function NavMenu({ active }: { active: number }) {
             </Link>
           ))}
         </ol> */}
-        <div className="flex justify-center items-center gap-4 right-slide-in">
+        <div className="flex justify-center items-center gap-10 right-slide-in">
           <CommandMenu />
           <AuthButton />
         </div>

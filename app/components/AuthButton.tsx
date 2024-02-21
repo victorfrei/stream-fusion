@@ -1,7 +1,11 @@
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import {ArrowLeftEndOnRectangleIcon, ArrowRightEndOnRectangleIcon} from  "@heroicons/react/24/outline"
+import {
+  ArrowLeftEndOnRectangleIcon,
+  ArrowRightEndOnRectangleIcon,
+} from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 export default async function AuthButton() {
   const supabase = createClient();
@@ -22,17 +26,33 @@ export default async function AuthButton() {
     <div className="flex items-center gap-4">
       Hey, {user.email}!
       <form action={signOut}>
-        <button className="py-2 px-8 gap-1 flex font-semibold rounded-md no-underline bg-accent hover:bg-accent/90 group/authButtonOut">
-          <ArrowRightEndOnRectangleIcon width={20} height={20} strokeWidth={2} className="group-hover/authButtonOut:-translate-x-1 transition-transform"/> Sair
+        <button className="relative p-8 gap-1 flex border-2 border-white shadow-xl rounded-full justify-center items-center font-semibold no-underline">
+          <Image
+            width={200}
+            height={200}
+            src={
+              "https://ebywanavgfdogjmovwss.supabase.co/storage/v1/object/public/avatars/36%20-%20jd8XbdA.png"
+            }
+            alt="Profile Image"
+            className="absolute w-full h-full group-hover/authButtonOut:-translate-x-1 transition-transform rounded-full"
+          />
         </button>
       </form>
     </div>
   ) : (
     <Link
       href="/login"
-      className="py-2 px-8 gap-1 flex justify-center items-center font-semibold rounded-md no-underline bg-accent hover:bg-accent/90 group/authButtonIn"
+      className="relative p-8 gap-1 flex border-2 border-white shadow-xl rounded-full justify-center items-center font-semibold no-underline"
     >
-      <ArrowLeftEndOnRectangleIcon width={20} height={20} strokeWidth={2} className="group-hover/authButtonIn:-translate-x-1 transition-transform"/> Entrar
+      <Image
+        width={200}
+        height={200}
+        src={
+          "https://ebywanavgfdogjmovwss.supabase.co/storage/v1/object/public/avatars/36%20-%20jd8XbdA.png"
+        }
+        alt="Profile Image"
+        className="absolute w-full h-full group-hover/authButtonOut:-translate-x-1 transition-transform rounded-full"
+      />
     </Link>
   );
 }
