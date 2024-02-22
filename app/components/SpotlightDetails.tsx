@@ -100,7 +100,7 @@ export function SpotlightDetails({
               </div>
             </div>
             {/* SpotLight Info Ends */}
-            <div className="right-slide-in flex flex-col justify-center items-center px-6 gap-10">
+            <div className="right-slide-in hidden lg:flex flex-col justify-center items-center px-6 gap-10">
               <Image
                 src={"https://image.tmdb.org/t/p/w500/" + content?.poster_path}
                 alt={content?.title}

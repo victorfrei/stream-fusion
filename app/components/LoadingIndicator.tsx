@@ -1,14 +1,31 @@
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
+"use client";
 
-export function LoadingIndicator({ setPage }: { setPage?: any }) {
+import { GetHomePageContent } from "@/page";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
+import { ContentGrid } from "./ContentGrid";
+
+export function LoadingIndicator() {
   const { ref, inView, entry } = useInView();
+  const [page, setPage] = useState(1);
+  const [newContent, setNewContent] = useState<any[]>([]);
+
+  const LoadMoreContent = async () => {
+    const newContent: any = await GetHomePageContent(page);
+    setNewContent((state: any[]) => [...state, ...newContent]);
+    setPage((page) => page + 1);
+  };
 
   useEffect(() => {
     if (inView) {
-      // setPage((prevState: number) => prevState + 1);
+      LoadMoreContent();
     }
   }, [inView]);
 
-  return <div ref={ref}>Loading</div>;
+  return (
+    <div className="flex flex-col justify-center items-center gap-10">
+      <ContentGrid content={newContent} />
+      <div ref={ref}>Loading page {page}</div>
+    </div>
+  );
 }

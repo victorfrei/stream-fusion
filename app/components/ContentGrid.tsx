@@ -2,18 +2,15 @@
 
 import { FireIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import { LoadingIndicator } from "./LoadingIndicator";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function ContentGrid({
   title,
-  contentArray,
+  content,
 }: {
   title?: string;
-  contentArray: any;
+  content: any;
 }) {
-  const router = useRouter();
-
   return (
     <div className="flex flex-col justify-center items-start gap-20 px-20">
       {title && (
@@ -22,14 +19,11 @@ export function ContentGrid({
           <p>{title}</p>
         </h2>
       )}
-      <div className="w-full flex flex-wrap gap-8">
-        {contentArray.map((e: any) => (
+      <div className="w-full flex justify-center flex-wrap gap-8">
+        {content.map((e: any) => (
           <div className="w-[250px] flex flex-col group">
-            <button
-              onClick={() => {
-                router.push(`/details/${e.media_type}/${e.id}`);
-                console.log(e);
-              }}
+            <Link
+              href={`/details/${e.media_type}/${e.id}`}
               className="w-full h-[360px] rounded-lg border-2 border-transparent hover:border-text cursor-pointer group-focus:!rounded-t-md group-focus:!rounded-b-none"
             >
               <Image
@@ -38,10 +32,11 @@ export function ContentGrid({
                 alt={e.title}
                 width={600}
                 height={600}
+                quality={60}
                 loading="lazy"
                 className="w-full h-full bg-secondary100 rounded-lg "
               ></Image>
-            </button>
+            </Link>
 
             <div className="w-full flex flex-col justify-center items-center pt-4 px-1 gap-2">
               <div className="text-lg w-full h-full font-semibold justify-between items-center group-focus:bg-secondary100">
@@ -56,8 +51,6 @@ export function ContentGrid({
             </div>
           </div>
         ))}
-
-        <LoadingIndicator />
       </div>
     </div>
   );

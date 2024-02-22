@@ -1,8 +1,9 @@
-"use server"
+"use server";
 import { NavMenu } from "./components/NavMenu";
 import { Spotlight } from "./components/Spotlight";
 import { ContentGrid } from "./components/ContentGrid";
 import { Suspense } from "react";
+import { LoadingIndicator } from "./components/LoadingIndicator";
 
 async function TrendingMovies() {
   const options = {
@@ -23,7 +24,7 @@ async function TrendingMovies() {
   return movies.results.filter((e: any) => e.media_type == "movies" || "tv");
 }
 
-async function GetHomePageContent(page: number) {
+export async function GetHomePageContent(page: number) {
   const options = {
     method: "GET",
     headers: {
@@ -67,7 +68,7 @@ async function GetHomePageContent(page: number) {
 
 export default async function Home() {
   const TrendingContent = await TrendingMovies();
-  const content = await GetHomePageContent(1);
+  // const content = await GetHomePageContent(1);
 
   return (
     <>
@@ -77,9 +78,8 @@ export default async function Home() {
         <div className="animate-in w-full flex-1 flex flex-col pb-10 gap-20 opacity-0">
           <main className="flex-1 w-full flex flex-col justify-start gap-20 overflow-hidden">
             <Suspense fallback={<p>Loading</p>}>
-            <Spotlight contentArray={TrendingContent} />
-
-            <ContentGrid contentArray={content} />
+              <Spotlight contentArray={TrendingContent} />
+              <LoadingIndicator />
             </Suspense>
           </main>
         </div>

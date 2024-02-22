@@ -53,7 +53,7 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
                     className="flex px-1 gap-y-2 gap-x-4 justify-start items-center text-lg text-start font-medium text-textSecondary left-slide-in"
                   >
                     <p className="flex gap-1 justify-center items-center font-semibold">
-                      {content?.original_language}
+                      {content?.original_language?.toUpperCase()}
                     </p>
                     <p className="flex gap-1 justify-center items-center font-semibold">
                       {new Date(
@@ -106,7 +106,7 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
                 </div>
               </div>
               {/* SpotLight Info Ends */}
-              <div className="right-slide-in flex flex-col justify-center items-center px-6 gap-4">
+              <div className="right-slide-in hidden flex-col justify-center items-center px-6 gap-4 lg:flex">
                 <Image
                   src={
                     "https://image.tmdb.org/t/p/w500/" + content?.poster_path
