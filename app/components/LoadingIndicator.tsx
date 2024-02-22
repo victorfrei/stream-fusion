@@ -1,18 +1,18 @@
 "use client";
 
-import { GetHomePageContent } from "@/page";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { ContentGrid } from "./ContentGrid";
+import { GetHomePageContent } from "@/actions/actions";
 
 export function LoadingIndicator() {
   const { ref, inView, entry } = useInView();
-  const [page, setPage] = useState(1);
-  const [newContent, setNewContent] = useState<any[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [newContent, setNewContent] = useState<any>([]);
 
   const LoadMoreContent = async () => {
     const newContent: any = await GetHomePageContent(page);
-    setNewContent((state: any[]) => [...state, ...newContent]);
+    setNewContent((state: any) => [...state, ...newContent]);
     setPage((page) => page + 1);
   };
 
