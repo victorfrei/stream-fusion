@@ -1,9 +1,8 @@
 "use server";
 
-import BackButton from "@/components/BackButton";
 import { NavMenu } from "@/components/NavMenu";
-import { Spotlight } from "@/components/Spotlight";
 import { SpotlightDetails } from "@/components/SpotlightDetails";
+import { Suspense } from "react";
 
 async function GetContentDetails(contentId: number, contentType: string) {
   const options = {
@@ -28,7 +27,7 @@ async function GetContentDetails(contentId: number, contentType: string) {
     );
     const videos = await responseVideos.json();
 
-    const video = videos.results.filter((e: any) => e.type == "Trailer")[0];
+    const video = videos?.results?.filter((e: any) => e.type == "Trailer")[0];
 
     return { ...movie, video: video };
   } else {
@@ -46,16 +45,17 @@ export default async function Home({
   return (
     <>
       {/* Remover Overflow depois */}
-      <div className="left-slide-in w-full h-full flex flex-col gap-10 items-center">
-        <NavMenu withBackground={true} />
+      <Suspense fallback={<p>Loading Content</p>}>
+        <div className="left-slide-in flex flex-col gap-10 items-center">
+          <NavMenu withBackground={false} />
 
-        <div className="animate-in w-full flex-1 flex flex-col pb-10 gap-20 opacity-0">
-          <main className="flex-1 w-full flex flex-col justify-start gap-20">
-            <BackButton />
-            <SpotlightDetails contentType={params.type} content={content} />
-          </main>
+          <div className="animate-in flex-1 flex flex-col pb-10 gap-20 opacity-0">
+            <main className="flex-1 flex flex-col justify-start gap-20">
+              <SpotlightDetails contentType={params.type} content={content} />
+            </main>
+          </div>
         </div>
-      </div>
+      </Suspense>
     </>
   );
 }

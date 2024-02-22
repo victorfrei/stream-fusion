@@ -33,13 +33,13 @@ export function NavMenu({
           <Image
             src={LogoWithoutText}
             alt="Stream Fusion Logo"
-            width={50}
-            height={50}
+            width={30}
+            height={30}
           />
           <Image
             src={LogoOnlyText}
             alt="Stream Fusion Logo"
-            width={240}
+            width={200}
             height={100}
           />
         </Link>

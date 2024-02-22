@@ -22,14 +22,15 @@ export function ContentGrid({
           <p>{title}</p>
         </h2>
       )}
-      <div className="grid md:grid-cols-4 lg:grid-cols-6 lg:gap-x-10 lg:gap-y-10">
+      <div className="w-full flex flex-wrap gap-8">
         {contentArray.map((e: any) => (
-
-
-          <div className="flex flex-col group">
+          <div className="w-[250px] flex flex-col group">
             <button
-              onClick={() => {router.push(`/details/${e.media_type}/${e.id}`); console.log(e)}}
-              className="w-[250px] h-[360px] rounded-lg border-2 border-transparent hover:border-text cursor-pointer group-focus:!rounded-t-md group-focus:!rounded-b-none"
+              onClick={() => {
+                router.push(`/details/${e.media_type}/${e.id}`);
+                console.log(e);
+              }}
+              className="w-full h-[360px] rounded-lg border-2 border-transparent hover:border-text cursor-pointer group-focus:!rounded-t-md group-focus:!rounded-b-none"
             >
               <Image
                 key={e.title}

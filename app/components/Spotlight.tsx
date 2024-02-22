@@ -29,7 +29,7 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
     <>
       {content && (
         <div
-          className={`w-full h-screen relative overflow-hidden transition-all group/spotlight`}
+          className={`h-screen relative overflow-hidden transition-all group/spotlight`}
         >
           {/* <div className="absolute flex justify-start items-center gap-10 z-10 w-full h-full  bg-gradient-to-t from-black via-black/70 to-black/20"> */}
 
@@ -50,24 +50,12 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
                   <p
                     onMouseEnter={pause}
                     onMouseLeave={start}
-                    className="flex gap-y-2 gap-x-4 max-w-48 justify-between items-center text-lg text-start font-medium text-textSecondary left-slide-in"
+                    className="flex px-1 gap-y-2 gap-x-4 justify-start items-center text-lg text-start font-medium text-textSecondary left-slide-in"
                   >
-                    <p className="flex gap-1 justify-center items-center text-base font-semibold">
-                      <FireIcon width={20} height={20} strokeWidth={2} />
-                      {Intl.NumberFormat().format(content?.vote_average)}
-                    </p>
-                    <p className="p-0.5 bg-gray-200/40 rounded-full"></p>
                     <p className="flex gap-1 justify-center items-center font-semibold">
-                      <LanguageIcon width={20} height={20} strokeWidth={2} />
                       {content?.original_language}
                     </p>
-                    <p className="p-0.5 bg-gray-200/40 rounded-full"></p>
                     <p className="flex gap-1 justify-center items-center font-semibold">
-                      <CalendarDaysIcon
-                        width={20}
-                        height={20}
-                        strokeWidth={2}
-                      />{" "}
                       {new Date(
                         content?.release_date || content?.first_air_date
                       ).getFullYear()}
@@ -77,41 +65,21 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
                   <p
                     onMouseEnter={pause}
                     onMouseLeave={start}
-                    className="text-lg max-w-2xl line-clamp-5 text-start font-medium text-textSecondary left-slide-in"
+                    className="text-lg px-1 max-w-2xl line-clamp-5 text-start font-medium text-textSecondary left-slide-in"
                   >
                     {content?.overview}
                   </p>
-
-                  <div className="flex gap-2 text-sm">
-                    <div
-                      onMouseEnter={pause}
-                      onMouseLeave={start}
-                      className="px-2 py-1 font-medium text-textSecondary bg-secondary100 rounded-md left-slide-in group-focus/spotlight:block transition-all "
-                    >
-                      Em Alta
-                    </div>
-                    <div
-                      onMouseEnter={pause}
-                      onMouseLeave={start}
-                      className="px-2 py-1 font-medium text-textSecondary bg-secondary100 rounded-md left-slide-in group-focus/spotlight:block transition-all "
-                    >
-                      Popular
-                    </div>
-                    <div
-                      onMouseEnter={pause}
-                      onMouseLeave={start}
-                      className="px-2 py-1 font-medium text-textSecondary bg-secondary100 rounded-md left-slide-in group-focus/spotlight:block transition-all "
-                    >
-                      Recomendado
-                    </div>
-                  </div>
                 </div>
 
-                <div className="flex gap-4">
+                <div className="flex px-1 gap-4">
                   <button
                     onMouseEnter={pause}
                     onMouseLeave={start}
-                    onClick={() => router.push(`/details/${content.media_type}/${content.id}`)}
+                    onClick={() =>
+                      router.push(
+                        `/details/${content.media_type}/${content.id}`
+                      )
+                    }
                     className="flex gap-2 justify-center items-center item px-10 py-3 text-base font-medium bg-accent hover:bg-accent/80 focus:bg-accent/80 rounded-md left-slide-in group-focus:block transition-all group/actionButtonA"
                   >
                     <EyeIcon
@@ -141,14 +109,14 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
               <div className="right-slide-in flex flex-col justify-center items-center px-6 gap-4">
                 <Image
                   src={
-                    "https://image.tmdb.org/t/p/original/" +
-                    content?.poster_path
+                    "https://image.tmdb.org/t/p/w500/" + content?.poster_path
                   }
                   onMouseEnter={pause}
                   onMouseLeave={start}
                   alt={content?.title}
                   width={300}
                   height={300}
+                  quality={80}
                   className="w-64 h-96 object-cover object-right-top border-2 border-text rounded-2xl"
                 ></Image>
                 <Progress
@@ -167,9 +135,9 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
               "https://image.tmdb.org/t/p/original/" + content?.backdrop_path
             }
             alt={content?.title}
-            width={2000}
-            height={600}
-            className="w-screen h-screen object-cover object-left-top bg-secondary100"
+            width={1920}
+            height={1080}
+            className="w-screen h-screen object-cover object-left-top  bg-secondary100"
           ></Image>
           {/* Background Image Ends */}
         </div>

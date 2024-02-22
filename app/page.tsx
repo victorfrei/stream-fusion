@@ -2,6 +2,7 @@
 import { NavMenu } from "./components/NavMenu";
 import { Spotlight } from "./components/Spotlight";
 import { ContentGrid } from "./components/ContentGrid";
+import { Suspense } from "react";
 
 async function TrendingMovies() {
   const options = {
@@ -74,10 +75,12 @@ export default async function Home() {
         <NavMenu />
 
         <div className="animate-in w-full flex-1 flex flex-col pb-10 gap-20 opacity-0">
-          <main className="flex-1 w-full flex flex-col justify-start gap-20">
+          <main className="flex-1 w-full flex flex-col justify-start gap-20 overflow-hidden">
+            <Suspense fallback={<p>Loading</p>}>
             <Spotlight contentArray={TrendingContent} />
 
             <ContentGrid contentArray={content} />
+            </Suspense>
           </main>
         </div>
       </div>
