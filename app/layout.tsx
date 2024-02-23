@@ -1,6 +1,6 @@
 import { Inter, Fredoka } from "next/font/google";
 import "./globals.css";
-import "plyr-react/plyr.css"
+import "plyr-react/plyr.css";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`

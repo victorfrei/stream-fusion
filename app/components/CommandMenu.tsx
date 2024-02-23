@@ -10,6 +10,7 @@ import {
   CommandList,
 } from "./ui/command";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const menuItems = [
   {
@@ -70,9 +71,9 @@ export function CommandMenu() {
           <CommandEmpty>Nada encontrado.</CommandEmpty>
           <CommandGroup heading="Páginas">
             {menuItems.map((item) => (
-              <a key={item.name} href={item.link}>
+              <Link key={item.name} href={item.link}>
                 <CommandItem>{item.name}</CommandItem>
-              </a>
+              </Link>
             ))}
           </CommandGroup>
         </CommandList>

@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { cache, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { ContentGrid } from "./ContentGrid";
 import { GetHomePageContent } from "@/actions/actions";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 export function LoadingIndicator() {
   const { ref, inView, entry } = useInView();
@@ -19,13 +20,22 @@ export function LoadingIndicator() {
   useEffect(() => {
     if (inView) {
       LoadMoreContent();
+      console.log("chamado! " + page);
     }
   }, [inView]);
 
   return (
     <div className="flex flex-col justify-center items-center gap-10">
       <ContentGrid content={newContent} />
-      <div ref={ref}>Loading page {page}</div>
+      <div ref={ref}>
+        <span className="sr-only">Carregando Proxíma Página</span>
+        <ArrowPathIcon
+          width={25}
+          height={25}
+          strokeWidth={2}
+          className="animate-spin"
+        />
+      </div>
     </div>
   );
 }

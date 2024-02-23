@@ -1,6 +1,9 @@
-" use server"
+"use server"
 
-export async function GetHomePageContent(page: number) {
+import { unstable_cache } from "next/cache"
+import { cache } from "react";
+
+export const GetHomePageContent = async (page: number) => {
   const options = {
     method: "GET",
     headers: {
@@ -38,6 +41,6 @@ export async function GetHomePageContent(page: number) {
     Object.assign(e, { media_type: "tv" });
   });
   const content = [...moviesContent.results, ...tvShowsContent.results];
-
-  return shuffle(content);
+  // shuffle(content)
+  return content;
 }

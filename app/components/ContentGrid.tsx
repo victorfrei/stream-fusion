@@ -21,7 +21,10 @@ export function ContentGrid({
       )}
       <div className="w-full flex justify-center flex-wrap gap-8">
         {content.map((e: any) => (
-          <div className="w-[250px] flex flex-col group">
+          <div
+            key={e.name + e.id || e.title + e.id}
+            className="w-[250px] flex flex-col group"
+          >
             <Link
               href={`/details/${e.media_type}/${e.id}`}
               className="w-full h-[360px] rounded-lg border-2 border-transparent hover:border-text cursor-pointer group-focus:!rounded-t-md group-focus:!rounded-b-none"

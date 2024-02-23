@@ -54,5 +54,6 @@ export const useTimer = ({
     start,
     stop,
     page,
+    limit
   };
 };

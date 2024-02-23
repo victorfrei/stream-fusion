@@ -10,13 +10,12 @@ import {
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { Progress } from "./ui/progress";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useTimer } from "./useTimer";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function Spotlight({ contentArray }: { contentArray: any }) {
-  const [content, setContent] = useState<any>([]);
-  const router = useRouter();
+  const [content, setContent] = useState<any>({});
   const { seconds, start, pause, reset, running, stop, page } = useTimer({
     pageLimit: contentArray.length - 1,
   });
@@ -27,7 +26,7 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
 
   return (
     <>
-      {content && (
+      {Object.keys(content).length > 0 && (
         <div
           className={`h-screen relative overflow-hidden transition-all group/spotlight`}
         >
@@ -47,7 +46,7 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
                     {content?.title || content?.name}
                   </h1>
 
-                  <p
+                  <div
                     onMouseEnter={pause}
                     onMouseLeave={start}
                     className="flex px-1 gap-y-2 gap-x-4 justify-start items-center text-lg text-start font-medium text-textSecondary left-slide-in"
@@ -60,7 +59,7 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
                         content?.release_date || content?.first_air_date
                       ).getFullYear()}
                     </p>
-                  </p>
+                  </div>
 
                   <p
                     onMouseEnter={pause}
@@ -72,14 +71,10 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
                 </div>
 
                 <div className="flex px-1 gap-4">
-                  <button
+                  <Link
                     onMouseEnter={pause}
                     onMouseLeave={start}
-                    onClick={() =>
-                      router.push(
-                        `/details/${content.media_type}/${content.id}`
-                      )
-                    }
+                    href={`/details/${content.media_type}/${content.id}`}
                     className="flex gap-2 justify-center items-center item px-10 py-3 text-base font-medium bg-accent hover:bg-accent/80 focus:bg-accent/80 rounded-md left-slide-in group-focus:block transition-all group/actionButtonA"
                   >
                     <EyeIcon
@@ -89,7 +84,7 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
                       className="group-hover/actionButtonA:-translate-x-1 transition-transform"
                     />{" "}
                     Detalhes
-                  </button>
+                  </Link>
                   <button
                     onMouseEnter={pause}
                     onMouseLeave={start}
@@ -109,7 +104,10 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
               <div className="right-slide-in hidden flex-col justify-center items-center px-6 gap-4 lg:flex">
                 <Image
                   src={
-                    "https://image.tmdb.org/t/p/w500/" + content?.poster_path
+                    content?.poster_path
+                      ? "https://image.tmdb.org/t/p/w500/" +
+                        content?.poster_path
+                      : "/"
                   }
                   onMouseEnter={pause}
                   onMouseLeave={start}
@@ -132,7 +130,10 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
           {/* Modificar Forma como as imagens são carregadas */}
           <Image
             src={
-              "https://image.tmdb.org/t/p/original/" + content?.backdrop_path
+              content?.backdrop_path
+                ? "https://image.tmdb.org/t/p/original/" +
+                  content?.backdrop_path
+                : "/"
             }
             alt={content?.title}
             width={1920}
