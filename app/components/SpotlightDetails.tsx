@@ -21,9 +21,6 @@ export function SpotlightDetails({
   content: any;
   contentType: string;
 }) {
-  const router = useRouter();
-  const [played, setPlayed] = useState(false);
-
   return (
     <>
       <div
@@ -40,7 +37,7 @@ export function SpotlightDetails({
                   <span>{content?.title || content?.name}</span>
                 </h1>
 
-                <p className="flex px-1 gap-y-2 gap-x-6 justify-start items-center text-lg text-start font-medium text-textSecondary left-slide-in">
+                <p className="flex px-1 gap-y-2 gap-x-6 justify-start items-center text-base text-start font-semibold text-textSecondary left-slide-in">
                   {contentType == "tv" && (
                     <p className="flex gap-1 justify-center items-center">
                       {content.networks[0].name}
@@ -48,7 +45,7 @@ export function SpotlightDetails({
                   )}
                 </p>
 
-                <p className="text-lg px-1 max-w-2xl line-clamp-5 text-start font-semibold text-textSecondary left-slide-in">
+                <p className="text-lg px-1 max-w-2xl line-clamp-5 text-start font-medium text-textSecondary left-slide-in">
                   {content?.overview}
                 </p>
 

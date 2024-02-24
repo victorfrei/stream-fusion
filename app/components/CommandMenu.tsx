@@ -11,29 +11,7 @@ import {
 } from "./ui/command";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-
-const menuItems = [
-  {
-    link: "/",
-    name: "Home",
-  },
-  // {
-  //   link: "/categories",
-  //   name: "Categorias",
-  // },
-  {
-    link: "/movies",
-    name: "Filmes",
-  },
-  {
-    link: "/tvshows",
-    name: "Séries",
-  },
-  {
-    link: "/animes",
-    name: "Animes",
-  },
-];
+import Image from "next/image";
 
 export function CommandMenu() {
   const [open, setOpen] = React.useState(false);
@@ -66,15 +44,34 @@ export function CommandMenu() {
         </div>
       </button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Digite para pesquisar..." />
-        <CommandList>
+        <CommandInput
+          placeholder="Digite para pesquisar..."
+          onValueChange={(value) => console.log(value)}
+        />
+        <CommandList className="scrollbar-thin scrollbar-thumb-secondary100 scrollbar-track-transparent scrollbar-thumb-rounded-lg">
           <CommandEmpty>Nada encontrado.</CommandEmpty>
-          <CommandGroup heading="Páginas">
-            {menuItems.map((item) => (
-              <Link key={item.name} href={item.link}>
-                <CommandItem>{item.name}</CommandItem>
-              </Link>
-            ))}
+
+          <CommandGroup>
+            <div className="flex flex-wrap gap-4 justify-start items-center px-5">
+              <CommandItem className="bg-transparent ">
+                <div className="w-52 h-80 bg-secondary rounded-lg"></div>
+              </CommandItem>
+              <CommandItem className="bg-transparent ">
+                <div className="w-52 h-80 bg-secondary rounded-lg"></div>
+              </CommandItem>
+              <CommandItem className="bg-transparent ">
+                <div className="w-52 h-80 bg-secondary rounded-lg"></div>
+              </CommandItem>
+              <CommandItem className="bg-transparent ">
+                <div className="w-52 h-80 bg-secondary rounded-lg"></div>
+              </CommandItem>
+              <CommandItem className="bg-transparent ">
+                <div className="w-52 h-80 bg-secondary rounded-lg"></div>
+              </CommandItem>
+              <CommandItem className="bg-transparent ">
+                <div className="w-52 h-80 bg-secondary rounded-lg"></div>
+              </CommandItem>
+            </div>
           </CommandGroup>
         </CommandList>
       </CommandDialog>

@@ -8,11 +8,11 @@ export default function Loading() {
       <Image
         src={LogoWithoutText}
         alt="Stream Fusion Logo"
-        width={50}
-        height={50}
+        width={60}
+        height={60}
         className="animate-spin"
       />
-      <span className="text-sm font-semibold">Loading</span>
+      <span className="text-lg font-semibold">Loading</span>
     </div>
   );
 }

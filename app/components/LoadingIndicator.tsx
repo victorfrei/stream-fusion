@@ -8,14 +8,16 @@ import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 export function LoadingIndicator() {
   const { ref, inView, entry } = useInView();
-  const [page, setPage] = useState<number>(1);
-  const [newContent, setNewContent] = useState<any>([]);
+  const [page, setPage] = useState<number>(GetPageData());
+  const [newContent, setNewContent] = useState<any>(GetContentData());
 
-  const LoadMoreContent = async () => {
-    const newContent: any = await GetHomePageContent(page);
-    setNewContent((state: any) => [...state, ...newContent]);
-    setPage((page) => page + 1);
-  };
+  useEffect(() => {
+    SetPageData();
+  }, [page]);
+
+  useEffect(() => {
+    SetContentData();
+  }, [newContent]);
 
   useEffect(() => {
     if (inView) {
@@ -23,6 +25,32 @@ export function LoadingIndicator() {
       console.log("chamado! " + page);
     }
   }, [inView]);
+
+  const LoadMoreContent = async () => {
+    const newContent: any = await GetHomePageContent(page);
+    setNewContent((state: any) => [...state, ...newContent]);
+    setPage((page) => page + 1);
+  };
+
+  function GetContentData() {
+    if (sessionStorage.getItem("HomepageContent")) {
+      return JSON.parse(sessionStorage.getItem("HomepageContent") ?? "");
+    } else {
+      return [];
+    }
+  }
+  function GetPageData() {
+    return parseInt(sessionStorage.getItem("Homepage") ?? "1");
+  }
+
+  function SetPageData() {
+    console.log(page);
+    sessionStorage.setItem("Homepage", String(page));
+  }
+
+  function SetContentData() {
+    sessionStorage.setItem("HomepageContent", JSON.stringify(newContent));
+  }
 
   return (
     <div className="flex flex-col justify-center items-center gap-10">

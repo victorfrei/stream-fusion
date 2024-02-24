@@ -32,7 +32,7 @@ module.exports = {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
-        muted:"#D1D5DB20",
+        muted: "#D1D5DB20",
         popover: "#1A1C1E",
         card: {
           DEFAULT: "hsl(var(--card))",
@@ -60,5 +60,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar")({ nocompatible: true, preferredStrategy: 'pseudoelements' })],
 }

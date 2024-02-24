@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import {
   ArrowLeftEndOnRectangleIcon,
   ArrowRightEndOnRectangleIcon,
+  BellIcon,
+  BookmarkIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import {
@@ -72,7 +74,9 @@ export function AvatarButton({
         <DropdownMenuItem>Support</DropdownMenuItem>
         <DropdownMenuItem>Termos de Uso</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Sair</DropdownMenuItem>
+        <button className="w-full">
+          <DropdownMenuItem>Sair</DropdownMenuItem>
+        </button>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -96,6 +100,18 @@ export default async function AuthButton() {
   return user ? (
     <div className="flex items-center gap-4">
       Hey, {user.email}!
+      <BellIcon
+        width={23}
+        height={23}
+        strokeWidth={2}
+        className="hover:fill-white/90 cursor-pointer"
+      />
+      <BookmarkIcon
+        width={23}
+        height={23}
+        strokeWidth={2}
+        className="hover:fill-white/90 cursor-pointer"
+      />
       <form action={signOut}>
         <AvatarButton user={user}>
           <button className="relative p-6 gap-1 flex border-2 border-white shadow-xl rounded-full justify-center items-center font-semibold no-underline">

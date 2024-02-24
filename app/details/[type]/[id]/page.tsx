@@ -1,7 +1,10 @@
 "use server";
 
+import { CastGrid } from "@/components/CastGrid";
+import { ContentGrid } from "@/components/ContentGrid";
 import { NavMenu } from "@/components/NavMenu";
 import { SpotlightDetails } from "@/components/SpotlightDetails";
+import Image from "next/image";
 import { cache } from "react";
 
 const GetContentDetails = cache(
@@ -26,11 +29,39 @@ const GetContentDetails = cache(
         `https://api.themoviedb.org/3/${contentType}/${contentId}/videos?language=en-US`,
         options
       );
+
+      const responseCasts = await fetch(
+        `https://api.themoviedb.org/3/${contentType}/${contentId}/credits?language=pt-BR`,
+        options
+      );
+
+      const responseRecomendations = await fetch(
+        `https://api.themoviedb.org/3/${contentType}/${contentId}/recommendations?language=pt-BR`,
+        options
+      );
+
+      const responseWhereToWatch = await fetch(
+        `https://api.themoviedb.org/3/${contentType}/${contentId}/watch/providers`,
+        options
+      );
       const videos = await responseVideos.json();
-
+      let casts = await responseCasts.json();
+      let recomendations = await responseRecomendations.json();
+      let whereToWatch = await responseWhereToWatch.json();
       const video = videos?.results?.filter((e: any) => e.type == "Trailer")[0];
+      casts = casts?.cast?.filter(
+        (e: any) => e.known_for_department == "Acting" && e.profile_path != null
+      );
+      recomendations = recomendations?.results;
+      whereToWatch = whereToWatch?.results.BR;
 
-      return { ...movie, video: video };
+      return {
+        ...movie,
+        video: video,
+        casts,
+        recomendations: recomendations,
+        whereToWatch: whereToWatch,
+      };
     } else {
       return [];
     }
@@ -47,17 +78,26 @@ export default async function Home({
   return (
     <>
       {/* Remover Overflow depois */}
-      {/* <Suspense fallback={<p>Loading Content</p>}> */}
-      <div className="left-slide-in flex flex-col gap-10 items-center">
+      <div className="left-slide-in flex flex-col gap-20 items-center pb-20">
         <NavMenu withBackground={false} />
 
         <div className="animate-in flex-1 flex flex-col gap-20 opacity-0">
           <main className="flex-1 flex flex-col justify-start gap-20">
             <SpotlightDetails contentType={params.type} content={content} />
+
+            <CastGrid
+              content={content.casts}
+              title={`Atores ${
+                content.media_type == "tv" ? "da Série" : "do Filme"
+              } (Com foto)`}
+            />
+            <ContentGrid
+              content={content.recomendations}
+              title="Conteúdos Similares"
+            />
           </main>
         </div>
       </div>
-      {/* </Suspense> */}
     </>
   );
 }

@@ -1,7 +1,11 @@
 "use client";
 
 import {
+  ArrowLeftIcon,
+  ArrowLongLeftIcon,
+  ArrowLongRightIcon,
   CalendarDaysIcon,
+  ChevronLeftIcon,
   EyeIcon,
   FireIcon,
   LanguageIcon,
@@ -16,7 +20,16 @@ import Link from "next/link";
 
 export function Spotlight({ contentArray }: { contentArray: any }) {
   const [content, setContent] = useState<any>({});
-  const { seconds, start, pause, reset, running, stop, page } = useTimer({
+  const {
+    seconds,
+    start,
+    pause,
+    page,
+    PageBack,
+    PageForward,
+    isPageBackActive,
+    isPageForwardActive,
+  } = useTimer({
     pageLimit: contentArray.length - 1,
   });
 
@@ -28,6 +41,7 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
     <>
       {Object.keys(content).length > 0 && (
         <div
+          id={content.id}
           className={`h-screen relative overflow-hidden transition-all group/spotlight`}
         >
           {/* <div className="absolute flex justify-start items-center gap-10 z-10 w-full h-full  bg-gradient-to-t from-black via-black/70 to-black/20"> */}
@@ -49,12 +63,12 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
                   <div
                     onMouseEnter={pause}
                     onMouseLeave={start}
-                    className="flex px-1 gap-y-2 gap-x-4 justify-start items-center text-lg text-start font-medium text-textSecondary left-slide-in"
+                    className="flex px-1 gap-y-2 gap-x-4 justify-start items-center text-base text-start font-semibold text-textSecondary left-slide-in"
                   >
-                    <p className="flex gap-1 justify-center items-center font-semibold">
+                    <p className="flex gap-1 justify-center items-center">
                       {content?.original_language?.toUpperCase()}
                     </p>
-                    <p className="flex gap-1 justify-center items-center font-semibold">
+                    <p className="flex gap-1 justify-center items-center">
                       {new Date(
                         content?.release_date || content?.first_air_date
                       ).getFullYear()}
@@ -117,11 +131,33 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
                   quality={80}
                   className="w-64 h-96 object-cover object-right-top border-2 border-text rounded-2xl"
                 ></Image>
-                <Progress
-                  value={seconds}
-                  color="white"
-                  className="bg-gray-700 w-3/12 fill-white transition-all"
-                />
+                <div className="flex gap-8 justify-evenly items-center w-full px-5">
+                  <button
+                    onClick={PageBack}
+                    disabled={!isPageBackActive}
+                    className="text-white/50 hover:scale-125 disabled:hover:scale-100 hover:text-white disabled:hover:text-red-500 disabled:text-gray-600 transition-transform"
+                  >
+                    <span className="sr-only">Mostar conteúdo anterior</span>
+                    <ArrowLongLeftIcon width={20} height={20} strokeWidth={2} />
+                  </button>
+                  <Progress
+                    value={seconds}
+                    color="white"
+                    className="bg-white/50 w-3/12 first:bg-background transition-all"
+                  />
+                  <button
+                    onClick={PageForward}
+                    disabled={!isPageForwardActive}
+                    className="text-white/50 hover:scale-125 disabled:hover:scale-100 hover:text-white disabled:hover:text-red-500 disabled:text-gray-600 transition-transform"
+                  >
+                    <span className="sr-only">Mostar proximo conteúdo</span>
+                    <ArrowLongRightIcon
+                      width={20}
+                      height={20}
+                      strokeWidth={2}
+                    />
+                  </button>
+                </div>
               </div>
             </div>
             {/* SpotLight Content Ends */}

@@ -3,6 +3,7 @@ import { NavMenu } from "./components/NavMenu";
 import { Spotlight } from "./components/Spotlight";
 import { LoadingIndicator } from "./components/LoadingIndicator";
 import { unstable_cache } from "next/cache";
+import { Suspense } from "react";
 
 const TrendingMovies = unstable_cache(
   async () => {
@@ -36,13 +37,15 @@ export default async function Home() {
 
   return (
     <>
-      <div className="w-full flex flex-col gap-10 items-center">
+      <div className="w-full flex flex-col gap-10 items-center ">
         <NavMenu />
 
         <div className="animate-in w-full flex-1 flex flex-col pb-14 gap-20 opacity-0">
           <main className="flex-1 w-full flex flex-col justify-start gap-20 overflow-hidden">
             <Spotlight contentArray={TrendingContent} />
-            <LoadingIndicator />
+            <Suspense>
+              <LoadingIndicator />
+            </Suspense>
           </main>
         </div>
       </div>

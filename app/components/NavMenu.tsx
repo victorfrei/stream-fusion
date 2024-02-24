@@ -45,19 +45,6 @@ export function NavMenu({
         </Link>
         <div className="flex justify-center items-center gap-8 right-slide-in">
           <CommandMenu />
-          <BellIcon
-            width={23}
-            height={23}
-            strokeWidth={2}
-            className="hover:fill-white/90 cursor-pointer"
-          />
-          <BookmarkIcon
-            width={23}
-            height={23}
-            strokeWidth={2}
-            className="hover:fill-white/90 cursor-pointer"
-          />
-
           <AuthButton />
         </div>
       </div>
