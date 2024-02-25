@@ -12,13 +12,14 @@ import React, { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 import Plyr from "plyr-react";
 import BackButton from "./BackButton";
+import { ResultDetail } from "../types/types";
 // import ReactPlayer from "react-player/youtube";
 
 export function SpotlightDetails({
   content,
   contentType,
 }: {
-  content: any;
+  content: ResultDetail;
   contentType: string;
 }) {
   return (
@@ -40,7 +41,7 @@ export function SpotlightDetails({
                 <p className="flex px-1 gap-y-2 gap-x-6 justify-start items-center text-base text-start font-semibold text-textSecondary left-slide-in">
                   {contentType == "tv" && (
                     <p className="flex gap-1 justify-center items-center">
-                      {content.networks[0].name}
+                      {content.networks ? content.networks[0].name : ""}
                     </p>
                   )}
                 </p>
@@ -60,7 +61,7 @@ export function SpotlightDetails({
                   ))}
                   <div className="px-2 py-1 font-medium text-textSecondary bg-secondary100 rounded-md left-slide-in group-focus/spotlight:block transition-all ">
                     {new Date(
-                      content?.release_date || content?.first_air_date
+                      content?.release_date ?? content?.first_air_date ?? ""
                     ).getFullYear()}
                   </div>
                 </div>
@@ -100,7 +101,7 @@ export function SpotlightDetails({
             <div className="right-slide-in hidden lg:flex flex-col justify-center items-center px-6 gap-10">
               <Image
                 src={"https://image.tmdb.org/t/p/w500/" + content?.poster_path}
-                alt={content?.title}
+                alt={content?.title ?? content.name ?? "Poster"}
                 width={300}
                 height={300}
                 className="w-64 h-96 object-cover object-right-top border-2 border-text rounded-2xl"
@@ -111,7 +112,7 @@ export function SpotlightDetails({
         </div>
         <Image
           src={"https://image.tmdb.org/t/p/original/" + content?.backdrop_path}
-          alt={content?.title}
+          alt={content?.title ?? content.name ?? "Poster"}
           width={1920}
           height={1080}
           className="w-screen h-screen object-cover object-left-top"

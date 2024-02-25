@@ -1,7 +1,6 @@
 "use server"
 
-import { unstable_cache } from "next/cache"
-import { cache } from "react";
+import { ApiResponse } from "../../types/types";
 
 export const GetHomePageContent = async (page: number) => {
   const options = {
@@ -11,13 +10,6 @@ export const GetHomePageContent = async (page: number) => {
       Authorization:
         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MDc4ODFlOGJhODU3YjU1ZTJmMTY2MGFkMjBmMDUzOCIsInN1YiI6IjVhMjVhMjJlMGUwYTI2NGNjZDBlMmQ5ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S5fkr34a6GZVfInJXs81AAjRNOGAR1EN2YLXVCahuY8",
     },
-  };
-  const shuffle = (array: string[]) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
   };
 
   const movies = await fetch(
@@ -29,18 +21,18 @@ export const GetHomePageContent = async (page: number) => {
     options
   );
 
-  const moviesContent: { results: [{}] } = await movies.json();
+  const moviesContent: ApiResponse = await movies.json();
 
   moviesContent.results.forEach((e: {}) => {
     Object.assign(e, { media_type: "movie" });
   });
 
-  const tvShowsContent = await tvShows.json();
+  const tvShowsContent: ApiResponse = await tvShows.json();
 
   tvShowsContent.results.forEach((e: {}) => {
     Object.assign(e, { media_type: "tv" });
   });
   const content = [...moviesContent.results, ...tvShowsContent.results];
-  // shuffle(content)
+  //!!! shuffleArray(content) - May be causing issues with duplicated element in array because of content caching
   return content;
 }

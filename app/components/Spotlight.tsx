@@ -17,9 +17,10 @@ import { Progress } from "./ui/progress";
 import React, { Suspense, useEffect, useState } from "react";
 import { useTimer } from "./useTimer";
 import Link from "next/link";
+import { ResultType } from "../types/types";
 
-export function Spotlight({ contentArray }: { contentArray: any }) {
-  const [content, setContent] = useState<any>({});
+export function Spotlight({ contentArray }: { contentArray: ResultType[] }) {
+  const [content, setContent] = useState<ResultType>();
   const {
     seconds,
     start,
@@ -39,9 +40,9 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
 
   return (
     <>
-      {Object.keys(content).length > 0 && (
+      {content && (
         <div
-          id={content.id}
+          id={content.id.toString()}
           className={`h-screen relative overflow-hidden transition-all group/spotlight`}
         >
           {/* <div className="absolute flex justify-start items-center gap-10 z-10 w-full h-full  bg-gradient-to-t from-black via-black/70 to-black/20"> */}
@@ -70,7 +71,7 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
                     </p>
                     <p className="flex gap-1 justify-center items-center">
                       {new Date(
-                        content?.release_date || content?.first_air_date
+                        content?.release_date ?? content?.first_air_date ?? ""
                       ).getFullYear()}
                     </p>
                   </div>
@@ -125,7 +126,7 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
                   }
                   onMouseEnter={pause}
                   onMouseLeave={start}
-                  alt={content?.title}
+                  alt={content?.title ?? content.name ?? "Poster"}
                   width={300}
                   height={300}
                   quality={80}
@@ -171,7 +172,7 @@ export function Spotlight({ contentArray }: { contentArray: any }) {
                   content?.backdrop_path
                 : "/"
             }
-            alt={content?.title}
+            alt={content?.title ?? content.name ?? "Poster"}
             width={1920}
             height={1080}
             className="w-screen h-screen object-cover object-left-top  bg-secondary100"

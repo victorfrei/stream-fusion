@@ -3,7 +3,7 @@
 import { cache, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { ContentGrid } from "./ContentGrid";
-import { GetHomePageContent } from "@/actions/actions";
+import { GetHomePageContent } from "@/components/actions/actions";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 export function LoadingIndicator() {
@@ -22,7 +22,6 @@ export function LoadingIndicator() {
   useEffect(() => {
     if (inView) {
       LoadMoreContent();
-      console.log("chamado! " + page);
     }
   }, [inView]);
 

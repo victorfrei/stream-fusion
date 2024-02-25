@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className={inter.className}>
-      <body className="bg-background text-text scroll-smooth scrollbar-thin scrollbar-corner-transparent scrollbar-thumb-secondary100 scrollbar-track-secondary scrollbar-thumb-rounded-sm">
+      <body className="bg-background text-text scrollbar-thin scrollbar-corner-transparent scrollbar-thumb-secondary100 scrollbar-track-secondary scrollbar-thumb-rounded-sm">
         <main className="min-h-screen flex flex-col items-center">
           {children}
         </main>

@@ -8,19 +8,20 @@ export function CastGrid({ title, content }: { title?: string; content: any }) {
   return (
     <div
       id={content.id}
-      className="flex flex-col justify-center items-start gap-20 px-20"
+      className="flex flex-col justify-center items-center lg:items-start gap-20 px-20"
     >
       {title && (
-        <h2 className="flex gap-4 justify-center items-center font-semibold text-3xl text-textSecondary">
+        <h2 className="flex gap-4 justify-center items-center font-semibold text-xl lg:text-3xl text-textSecondary">
           {/* <FireIcon width={30} height={30} strokeWidth={2} /> */}
           <p>{title}</p>
         </h2>
       )}
-      <div className="w-full flex justify-start flex-wrap gap-8">
+
+      <div className="flex justify-center lg:justify-start flex-wrap gap-8">
         {content.map((e: any) => (
           <div
             key={e.original_name || e.cast_id}
-            className="w-[250px] flex flex-col group"
+            className=":w-[230px] flex flex-col group"
           >
             <Image
               key={e.original_name}
@@ -30,7 +31,7 @@ export function CastGrid({ title, content }: { title?: string; content: any }) {
               height={600}
               quality={60}
               loading="lazy"
-              className="w-full bg-secondary100 rounded-lg "
+              className="w-full h-[330px] bg-secondary100 rounded-lg "
             ></Image>
 
             <div className="w-full flex flex-col justify-center items-center pt-4 px-1 gap-2">
