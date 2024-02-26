@@ -7,7 +7,7 @@ import Link from "next/link";
 export function CastGrid({ title, content }: { title?: string; content: any }) {
   return (
     <div
-      id={content.id+Math.random()*1000}
+      id={content.id}
       className="flex flex-col justify-center items-center lg:items-start gap-20 px-20"
     >
       {title && (

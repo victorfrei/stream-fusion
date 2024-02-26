@@ -27,7 +27,7 @@ export function ContentGrid({
         {content.map((e) => (
           <div
             id={e.id.toString()}
-            key={e.id ?? e.name}
+            key={(e?.title ?? e.name ?? "Poster") + Math.random() * 1000}
             className="w-[220px] flex flex-col group"
           >
             <Link
@@ -35,7 +35,6 @@ export function ContentGrid({
               className="h-[330px] rounded-lg border-2 border-transparent hover:border-text cursor-pointer group-focus:!rounded-t-md group-focus:!rounded-b-none"
             >
               <Image
-                key={e?.title ?? e.name ?? "Poster"}
                 src={"https://image.tmdb.org/t/p/original/" + e.poster_path}
                 alt={e?.title ?? e.name ?? "Poster"}
                 width={600}
