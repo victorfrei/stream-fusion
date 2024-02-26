@@ -28,7 +28,7 @@ export function NavMenu({
         withBackground ? "animate-in bg-black pb-2" : ""
       } z-50 top-0 w-full flex justify-center items-center pt-10 pl-20 pr-24`}
     >
-      <div className="w-full flex justify-between items-center text-sm">
+      <div id="navBar" className="w-full flex justify-between items-center text-sm">
         <Link href={"/"} className="flex gap-4 left-slide-in">
           <Image
             src={LogoWithoutText}
