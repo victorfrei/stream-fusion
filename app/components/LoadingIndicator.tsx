@@ -8,19 +8,30 @@ import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 export function LoadingIndicator() {
   const { ref, inView, entry } = useInView();
-  const [page, setPage] = useState<number>(GetPageData());
-  const [newContent, setNewContent] = useState<any>(GetContentData());
+  const [page, setPage] = useState<number>(1);
+  const [canLoad, setCanLoad] = useState<any>(false);
+  const [newContent, setNewContent] = useState<any>([]);
 
   useEffect(() => {
-    SetPageData();
+    GetPageData();
+    GetContentData();
+    setCanLoad(true);
+  }, []);
+
+  useEffect(() => {
+    if (canLoad) {
+      SetPageData();
+    }
   }, [page]);
 
   useEffect(() => {
-    SetContentData();
+    if (canLoad) {
+      SetContentData();
+    }
   }, [newContent]);
 
   useEffect(() => {
-    if (inView) {
+    if (inView && canLoad) {
       LoadMoreContent();
     }
   }, [inView]);
@@ -32,18 +43,19 @@ export function LoadingIndicator() {
   };
 
   function GetContentData() {
-    if (sessionStorage.getItem("HomepageContent")) {
-      return JSON.parse(sessionStorage.getItem("HomepageContent") ?? "");
+    if (sessionStorage?.getItem("HomepageContent")) {
+      setNewContent(
+        JSON.parse(sessionStorage?.getItem("HomepageContent") ?? "")
+      );
     } else {
-      return [];
+      setNewContent([]);
     }
   }
   function GetPageData() {
-    return parseInt(sessionStorage.getItem("Homepage") ?? "1");
+    setPage(parseInt(sessionStorage?.getItem("Homepage") ?? "1"));
   }
 
   function SetPageData() {
-    console.log(page);
     sessionStorage.setItem("Homepage", String(page));
   }
 
@@ -54,15 +66,17 @@ export function LoadingIndicator() {
   return (
     <div className="flex flex-col justify-center items-center gap-10">
       <ContentGrid content={newContent} />
-      <div ref={ref}>
-        <span className="sr-only">Carregando Proxíma Página</span>
-        <ArrowPathIcon
-          width={25}
-          height={25}
-          strokeWidth={2}
-          className="animate-spin"
-        />
-      </div>
+      {canLoad && (
+        <div ref={ref}>
+          <span className="sr-only">Carregando Proxíma Página</span>
+          <ArrowPathIcon
+            width={25}
+            height={25}
+            strokeWidth={2}
+            className="animate-spin"
+          />
+        </div>
+      )}
     </div>
   );
 }

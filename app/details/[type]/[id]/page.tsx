@@ -4,7 +4,7 @@ import { CastGrid } from "@/components/CastGrid";
 import { ContentGrid } from "@/components/ContentGrid";
 import { NavMenu } from "@/components/NavMenu";
 import { SpotlightDetails } from "@/components/SpotlightDetails";
-import { ContentDetail, GetContentDetails } from "@/components/actions/actions";
+import { GetContentDetails } from "@/components/actions/actions";
 
 export default async function Home({
   params,
