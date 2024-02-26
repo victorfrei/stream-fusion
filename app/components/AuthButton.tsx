@@ -71,8 +71,8 @@ export function AvatarButton({
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>GitHub</DropdownMenuItem>
-        <DropdownMenuItem>Support</DropdownMenuItem>
-        <DropdownMenuItem>Termos de Uso</DropdownMenuItem>
+        {/* <DropdownMenuItem>Support</DropdownMenuItem>
+        <DropdownMenuItem>Termos de Uso</DropdownMenuItem> */}
         <DropdownMenuSeparator />
         <button className="w-full">
           <DropdownMenuItem>Sair</DropdownMenuItem>

@@ -45,7 +45,7 @@ export function NavMenu({
         </Link>
         <div className="flex justify-center items-center gap-8 right-slide-in">
           <CommandMenu />
-          <AuthButton />
+          {/* <AuthButton /> */}
         </div>
       </div>
     </nav>

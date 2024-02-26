@@ -4,6 +4,8 @@ export type ApiResponse = {
   results: ResultType[];
 };
 
+export interface ApiResponseMovie extends ResultType { };
+
 export type ResultType = {
   adult: boolean;
   backdrop_path: string;
@@ -34,7 +36,53 @@ export type ResultType = {
   vote_average: number;
   vote_count: number;
   origin_country?: string[];
+  homepage: string;
+  genres: Genre[];
+  networks: Network[];
 };
+
+export type ApiCasts = {
+  cast?: Cast[],
+}
+
+export type Cast = {
+  name: string;
+  original_name: string;
+  cast_id: number;
+  known_for_department: string;
+  profile_path: string;
+}
+
+export type ApiWhereToWatch = {
+  id: number,
+  results: {
+    BR: WatchContent,
+    FR: WatchContent,
+    US: WatchContent,
+  }
+}
+
+export type WatchContent = {
+  link: string,
+  rent: {
+    logo_path: string;
+    provider_id: number;
+    provider_name: string;
+    display_priority: number;
+  },
+  flatrate: {
+    logo_path: string;
+    provider_id: number;
+    provider_name: string;
+    display_priority: number;
+  }
+  buy: {
+    logo_path: string;
+    provider_id: number;
+    provider_name: string;
+    display_priority: number;
+  }
+}
 
 
 export type ResultDetail = {

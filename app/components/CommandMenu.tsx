@@ -43,38 +43,39 @@ export function CommandMenu() {
           {isMac ? "⌘" : "Alt"} + O
         </div>
       </button>
-      <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput
-          placeholder="Digite para pesquisar..."
-          onValueChange={(value) => console.log(value)}
-        />
-        <CommandList className="scrollbar-thin scrollbar-thumb-secondary100 scrollbar-track-transparent scrollbar-thumb-rounded-lg">
-          <CommandEmpty>Nada encontrado.</CommandEmpty>
+      <form action={""}>
+        <CommandDialog open={open} onOpenChange={setOpen}>
+          <CommandInput
+            placeholder="Digite para pesquisar..."
+          />
+          <CommandList className="scrollbar-thin scrollbar-thumb-secondary100 scrollbar-track-transparent scrollbar-thumb-rounded-lg">
+            {/* <CommandEmpty>Nada encontrado.</CommandEmpty> */}
 
-          <CommandGroup>
-            <div className="flex flex-wrap gap-4 justify-start items-center px-5">
-              <CommandItem className="bg-transparent ">
-                <div className="w-52 h-80 bg-secondary rounded-lg"></div>
-              </CommandItem>
-              <CommandItem className="bg-transparent ">
-                <div className="w-52 h-80 bg-secondary rounded-lg"></div>
-              </CommandItem>
-              <CommandItem className="bg-transparent ">
-                <div className="w-52 h-80 bg-secondary rounded-lg"></div>
-              </CommandItem>
-              <CommandItem className="bg-transparent ">
-                <div className="w-52 h-80 bg-secondary rounded-lg"></div>
-              </CommandItem>
-              <CommandItem className="bg-transparent ">
-                <div className="w-52 h-80 bg-secondary rounded-lg"></div>
-              </CommandItem>
-              <CommandItem className="bg-transparent ">
-                <div className="w-52 h-80 bg-secondary rounded-lg"></div>
-              </CommandItem>
-            </div>
-          </CommandGroup>
-        </CommandList>
-      </CommandDialog>
+            {/* <CommandGroup>
+              <div className="flex flex-wrap gap-4 justify-start items-center px-5">
+                <CommandItem className="bg-transparent ">
+                  <div className="w-52 h-80 bg-secondary rounded-lg"></div>
+                </CommandItem>
+                <CommandItem className="bg-transparent ">
+                  <div className="w-52 h-80 bg-secondary rounded-lg"></div>
+                </CommandItem>
+                <CommandItem className="bg-transparent ">
+                  <div className="w-52 h-80 bg-secondary rounded-lg"></div>
+                </CommandItem>
+                <CommandItem className="bg-transparent ">
+                  <div className="w-52 h-80 bg-secondary rounded-lg"></div>
+                </CommandItem>
+                <CommandItem className="bg-transparent ">
+                  <div className="w-52 h-80 bg-secondary rounded-lg"></div>
+                </CommandItem>
+                <CommandItem className="bg-transparent ">
+                  <div className="w-52 h-80 bg-secondary rounded-lg"></div>
+                </CommandItem>
+              </div>
+            </CommandGroup> */}
+          </CommandList>
+        </CommandDialog>
+      </form>
     </div>
   );
 }

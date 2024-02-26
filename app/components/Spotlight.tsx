@@ -100,7 +100,7 @@ export function Spotlight({ contentArray }: { contentArray: ResultType[] }) {
                     />{" "}
                     Detalhes
                   </Link>
-                  <button
+                  {/* <button
                     onMouseEnter={pause}
                     onMouseLeave={start}
                     className="flex gap-2 text-gray-500 justify-center items-center item px-10 py-3 text-base font-medium border-2 border-secondary100 hover:border-secondary100/60 focus:bg-secondary100/60 rounded-md left-slide-in group-focus:block transition-all group/actionButtonB "
@@ -111,8 +111,8 @@ export function Spotlight({ contentArray }: { contentArray: ResultType[] }) {
                       strokeWidth={2}
                       className="group-hover/actionButtonB:-translate-x-1 transition-transform"
                     />{" "}
-                    Adicionar aos Favoritos
-                  </button>
+                    Recomendar à todos
+                  </button> */}
                 </div>
               </div>
               {/* SpotLight Info Ends */}

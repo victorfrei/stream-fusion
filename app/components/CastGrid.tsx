@@ -17,11 +17,11 @@ export function CastGrid({ title, content }: { title?: string; content: any }) {
         </h2>
       )}
 
-      <div className="flex justify-center lg:justify-start flex-wrap gap-8">
+      <div className="flex justify-start items-center flex-wrap gap-8">
         {content.map((e: any) => (
           <div
             key={e.original_name || e.cast_id}
-            className=":w-[230px] flex flex-col group"
+            className="w-[220px] flex flex-col group"
           >
             <Image
               key={e.original_name}
