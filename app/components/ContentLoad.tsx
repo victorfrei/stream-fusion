@@ -6,7 +6,7 @@ import { ContentGrid } from "./ContentGrid";
 import { GetHomePageContent } from "@/components/actions/actions";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
-export function LoadingIndicator() {
+export function ContentLoad() {
   const { ref, inView, entry } = useInView();
   const [page, setPage] = useState<number>(1);
   const [canLoad, setCanLoad] = useState<any>(false);

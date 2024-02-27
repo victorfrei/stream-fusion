@@ -2,6 +2,33 @@ import { ApiResponseMovie, ApiWhereToWatch, Cast, ResultType } from './../../typ
 "use server"
 
 import { ApiCasts, ApiResponse } from "../../types/types";
+import { redirect } from 'next/navigation';
+
+export const Search = async ({ query, lang }: { query: string, lang: string }) => {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MDc4ODFlOGJhODU3YjU1ZTJmMTY2MGFkMjBmMDUzOCIsInN1YiI6IjVhMjVhMjJlMGUwYTI2NGNjZDBlMmQ5ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.S5fkr34a6GZVfInJXs81AAjRNOGAR1EN2YLXVCahuY8",
+    },
+  };
+  const result = await fetch(
+    `https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=${lang}&page=1`,
+    options
+  );
+
+  const queryResult: ApiResponse = await result.json();
+
+  console.log(queryResult.results);
+  return queryResult.results.filter((e) => e.poster_path != null);
+}
+
+export const SearchRedirect = async (formData: FormData) => {
+  const query = formData.get("query");
+  const lang = formData.get("lang");
+  return redirect(`/search/${lang}/${query}`);
+};
 
 export const GetHomePageContent = async (page: number) => {
   const options = {
@@ -110,5 +137,5 @@ export const TrendingMovies = async () => {
   );
   const movies: ApiResponse = await response.json();
 
-  return movies.results.filter((e: any) => e.media_type == "movies" || "tv");
+  return movies.results.filter((e) => (e.media_type == "movie" || e.media_type == "tv") && e.poster_path != null);
 };

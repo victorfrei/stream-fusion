@@ -11,7 +11,7 @@ export default function BackButton() {
   return (
     <Link
       href={`${params.get("r") ?? "/"}`}
-      className="left-slide-in top-40 left-20 z-40 px-6 py-2 bg-secondary hover:bg-secondary100 rounded-md text-sm font-semibold flex gap-4 justify-center items-center group/back cursor-pointer"
+      className="left-slide-in z-40 px-6 py-2 bg-secondary hover:bg-secondary100 rounded-md text-sm font-semibold flex gap-4 justify-center items-center group/back cursor-pointer"
     >
       <ArrowLeftIcon
         width={17}
