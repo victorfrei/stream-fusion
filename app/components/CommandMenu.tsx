@@ -48,6 +48,7 @@ export function CommandMenu() {
           <CommandInput
             placeholder="Digite para pesquisar..."
           />
+          <button>Pesquisar</button>
           <CommandList className="scrollbar-thin scrollbar-thumb-secondary100 scrollbar-track-transparent scrollbar-thumb-rounded-lg">
             {/* <CommandEmpty>Nada encontrado.</CommandEmpty> */}
 

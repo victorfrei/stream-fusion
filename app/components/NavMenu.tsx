@@ -16,6 +16,8 @@ import {
   SparklesIcon,
   TvIcon,
 } from "@heroicons/react/24/outline";
+import { SearchModal } from "./SearchModal";
+import SearchInput from "./SearchInput";
 
 export function NavMenu({
   withBackground = false,
@@ -45,7 +47,9 @@ export function NavMenu({
           />
         </Link>
         <div className="flex justify-center items-center gap-8 right-slide-in">
-          <CommandMenu />
+          <SearchInput />
+          {/* <SearchModal /> */}
+          {/* <CommandMenu /> */}
           {/* <AuthButton /> */}
         </div>
       </div>
