@@ -16,7 +16,7 @@ export function ContentGrid({
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col justify-center items-center lg:items-start gap-20 px-20">
+    <div className="flex flex-col justify-center items-center lg:items-start gap-20 lg:px-20">
       {title && (
         <h2 className="flex gap-4 justify-center items-center font-semibold text-xl lg:text-3xl text-textSecondary">
           {/* <FireIcon width={30} height={30} strokeWidth={2} /> */}

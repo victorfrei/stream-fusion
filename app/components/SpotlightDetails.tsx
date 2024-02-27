@@ -22,14 +22,14 @@ export function SpotlightDetails({
       <div
         className={`relative z-20 overflow-hidden transition-all group/spotlight`}
       >
-        <div className="absolute flex flex-col px-20 justify-center items-start gap-10 z-10 w-full h-full  bg-gradient-to-r from-black via-black/80 to-black/20">
+        <div className="absolute flex flex-col px-5 lg:px-20 justify-center items-start gap-10 z-10 w-full h-full  bg-gradient-to-r from-black via-black/80 to-black/20">
           {/* SpotLight Content */}
           <BackButton />
           <div className="w-full flex justify-between items-center">
             {/* SpotLight Info */}
             <div className="flex flex-col justify-start items-start gap-16 transition-all">
               <div className="flex flex-col gap-4">
-                <h1 className="flex flex-col gap-4 text-6xl max-w-4xl text-start font-bold left-slide-in">
+                <h1 className="flex flex-col text-3xl lg:text-6xl lg:max-w-4xl gap-4  text-start font-bold left-slide-in">
                   <span>{content?.title || content?.name}</span>
                 </h1>
 
@@ -41,7 +41,7 @@ export function SpotlightDetails({
                   )}
                 </p>
 
-                <p className="text-lg px-1 max-w-2xl line-clamp-5 text-start font-medium text-textSecondary left-slide-in">
+                <p className="text-base lg:text-lg px-1 max-w-2xl line-clamp-5 text-start font-medium text-textSecondary left-slide-in">
                   {content?.overview}
                 </p>
 

@@ -14,8 +14,8 @@ export default async function Home() {
         <div id="navBar" className="fixed top-0 h-10 w-full z-50"></div>
         <NavMenu />
 
-        <div className="animate-in w-full flex-1 flex flex-col pb-14 gap-20 opacity-0">
-          <main className="flex-1 w-full flex flex-col justify-start gap-20 overflow-hidden">
+        <div className="animate-in w-full flex flex-col pb-14 gap-20 opacity-0">
+          <main className="w-full flex flex-col justify-start gap-20 overflow-hidden">
             <Spotlight contentArray={TrendingContent} />
             <ContentLoad />
           </main>
