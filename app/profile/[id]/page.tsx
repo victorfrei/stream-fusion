@@ -1,5 +1,5 @@
 import { NavMenu } from "@/components/NavMenu";
-import { createClient } from "@/utils/supabase/server";
+
 import {
   ArrowLeftIcon,
   PlusIcon,
@@ -11,11 +11,8 @@ import BackButton from "@/components/BackButton";
 
 
 export default async function Profile({ params }: { params: { id: string } }) {
-  const supabase = createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+
 
   return (
     <>

@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  PlayIcon,
-  PlusIcon,
-} from "@heroicons/react/24/outline";
+import { PlayIcon, PlusIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import React from "react";
 import BackButton from "./BackButton";
@@ -14,7 +11,7 @@ export function SpotlightDetails({
   content,
   contentType,
 }: {
-  content : ApiResponseMovie;
+  content: ApiResponseMovie;
   contentType: string;
 }) {
   return (
@@ -61,7 +58,6 @@ export function SpotlightDetails({
                   </div>
                 </div>
               </div>
-
               <div className="flex px-1 gap-4">
                 {content.homepage != "" && (
                   <a
@@ -78,18 +74,6 @@ export function SpotlightDetails({
                     Assistir
                   </a>
                 )}
-                {/* <button
-                  onClick={() => {}}
-                  className="flex gap-2 text-gray-500 justify-center items-center item px-10 py-3 text-base font-medium border-2 border-secondary100 hover:border-secondary100/60 focus:bg-secondary100/60 rounded-md left-slide-in group-focus:block transition-all group/actionButtonB "
-                >
-                  <PlusIcon
-                    width={22}
-                    height={22}
-                    strokeWidth={2}
-                    className="group-hover/actionButtonB:-translate-x-1 transition-transform"
-                  />{" "}
-                  Recomendar à todos
-                </button> */}
               </div>
             </div>
             {/* SpotLight Info Ends */}

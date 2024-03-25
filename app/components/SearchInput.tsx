@@ -24,6 +24,7 @@ export default function SearchInput() {
           <input
             placeholder="Digite aqui para pesquisar"
             name="query"
+            autoComplete="off"
             onChange={(e) => setValue(e.target.value)}
             onClick={() => {
               setSelect(true);
