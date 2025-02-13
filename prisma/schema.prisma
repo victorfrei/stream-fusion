@@ -1,0 +1,151 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id         String @id @default(uuid())
+  locale     String
+  ip         String
+  device     String
+  account_id String
+
+  account Account @relation(fields: [account_id], references: [id])
+}
+
+model Account {
+  id        String   @id @default(uuid())
+  email     String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users    User[]
+  Sessions Session[]
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  photo     String
+  language  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  account    Account?   @relation(fields: [account_id], references: [id])
+  account_id String?
+  Favorites  Favorite[]
+  rating     Rating[]
+}
+
+model Favorite {
+  id         String  @id @default(uuid())
+  movie_id   String?
+  tv_show_id String?
+  user_id    String?
+
+  user    User?   @relation(fields: [user_id], references: [id])
+  movie   Movie?  @relation(fields: [movie_id], references: [id])
+  tv_show TvShow? @relation(fields: [tv_show_id], references: [id])
+}
+
+model TvShow {
+  id            String         @id @default(uuid())
+  title         String
+  description   String
+  year          Int
+  duration      String
+  age_rating    AgeRating[]
+  seasons       Int
+  image_quality ImageQuality[]
+  genres        Genre[]
+  directors     Director[]
+  rating        Rating[]
+  country       String
+  coverUrl      String
+  bannerUrl     String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  Favorites     Favorite[]
+}
+
+model Movie {
+  id            String         @id @default(uuid())
+  title         String
+  description   String
+  year          Int
+  age_rating    AgeRating[]
+  duration      String
+  image_quality ImageQuality[]
+  genres        Genre[]
+  directors     Director[]
+  rating        Rating[]
+  country       String
+  coverUrl      String
+  bannerUrl     String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  Favorites     Favorite[]
+}
+
+model Genre {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
+  tv_shows    TvShow[]
+  movies      Movie[]
+}
+
+model Director {
+  id          String   @id @default(uuid())
+  photo       String
+  name        String
+  description String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
+  tv_shows    TvShow[]
+  movies      Movie[]
+}
+
+model Rating {
+  id         String  @id @default(uuid())
+  value      Boolean
+  tv_show_id String?
+  movie_id   String?
+  user_id    String?
+
+  user    User?   @relation(fields: [user_id], references: [id])
+  tv_show TvShow? @relation(fields: [tv_show_id], references: [id])
+  movie   Movie?  @relation(fields: [movie_id], references: [id])
+}
+
+model AgeRating {
+  id          String   @id @default(uuid())
+  rating      String
+  description String
+  created_at  DateTime @default(now())
+  tv_shows    TvShow[]
+  movies      Movie[]
+}
+
+model ImageQuality {
+  id         String   @id @default(uuid())
+  name       String
+  resolution String
+  tv_shows   TvShow[]
+  movies     Movie[]
+
+  created_at DateTime @default(now())
+}

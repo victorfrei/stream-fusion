@@ -12,3 +12,11 @@ const shuffleArray = (array: string[]) => {
   }
   return array;
 };
+
+export function FormatTime({ date, locale }: { date?: Date, locale?: string } = { date: new Date(), locale: 'pt-BR' }) {
+  return new Intl.DateTimeFormat(locale, {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false, // Define se será 24h (false) ou 12h (true)
+  }).format(date);
+}

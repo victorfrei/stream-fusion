@@ -12,61 +12,62 @@ export function ContentLoad() {
   const [canLoad, setCanLoad] = useState<any>(false);
   const [newContent, setNewContent] = useState<any>([]);
 
-  useEffect(() => {
-    GetPageData();
-    GetContentData();
-    setCanLoad(true);
-  }, []);
+  // useEffect(() => {
+  //   GetPageData();
+  //   GetContentData();
+  //   setCanLoad(true);
+  // }, []);
 
-  useEffect(() => {
-    if (canLoad) {
-      SetPageData();
-    }
-  }, [page]);
+  // useEffect(() => {
+  //   if (canLoad) {
+  //     SetPageData();
+  //   }
+  // }, [page]);
 
-  useEffect(() => {
-    if (canLoad) {
-      SetContentData();
-    }
-  }, [newContent]);
+  // useEffect(() => {
+  //   if (canLoad) {
+  //     SetContentData();
+  //   }
+  // }, [newContent]);
 
-  useEffect(() => {
-    if (inView && canLoad) {
-      LoadMoreContent();
-    }
-  }, [inView]);
+  // useEffect(() => {
+  //   if (inView && canLoad) {
+  //     LoadMoreContent();
+  //   }
+  // }, [inView]);
 
-  const LoadMoreContent = async () => {
-    const newContent: any = await GetHomePageContent(page);
-    setNewContent((state: any) => [...state, ...newContent]);
-    setPage((page) => page + 1);
-  };
+  // const LoadMoreContent = async () => {
+  //   const newContent: any = await GetHomePageContent(page);
+  //   setNewContent((state: any) => [...state, ...newContent]);
+  //   setPage((page) => page + 1);
+  // };
 
-  function GetContentData() {
-    if (sessionStorage?.getItem("HomepageContent")) {
-      setNewContent(
-        JSON.parse(sessionStorage?.getItem("HomepageContent") ?? "")
-      );
-    } else {
-      setNewContent([]);
-    }
-  }
-  function GetPageData() {
-    setPage(parseInt(sessionStorage?.getItem("Homepage") ?? "1"));
-  }
+  // function GetContentData() {
+  //   if (sessionStorage?.getItem("HomepageContent")) {
+  //     setNewContent(
+  //       JSON.parse(sessionStorage?.getItem("HomepageContent") ?? "")
+  //     );
+  //   } else {
+  //     setNewContent([]);
+  //   }
+  // }
 
-  function SetPageData() {
-    sessionStorage.setItem("Homepage", String(page));
-  }
+  // function GetPageData() {
+  //   setPage(parseInt(sessionStorage?.getItem("Homepage") ?? "1"));
+  // }
 
-  function SetContentData() {
-    sessionStorage.setItem("HomepageContent", JSON.stringify(newContent));
-  }
+  // function SetPageData() {
+  //   sessionStorage.setItem("Homepage", String(page));
+  // }
+
+  // function SetContentData() {
+  //   sessionStorage.setItem("HomepageContent", JSON.stringify(newContent));
+  // }
 
   return (
-    <div className="flex flex-col justify-center items-center gap-10">
+    <div className="flex flex-col justify-center items-center gap-10 z-30">
       <ContentGrid content={newContent} />
-      {canLoad && (
+      {/* {canLoad && (
         <div ref={ref}>
           <span className="sr-only">Carregando Proxíma Página</span>
           <ArrowPathIcon
@@ -76,7 +77,7 @@ export function ContentLoad() {
             className="animate-spin"
           />
         </div>
-      )}
+      )} */}
     </div>
   );
 }
