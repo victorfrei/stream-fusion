@@ -44,7 +44,7 @@ export default async function Home() {
 
         {/* <Clock /> */}
 
-        <Player playbackId="TSsaWDwYOFNH3fIAksOgCG96fRO3UQ9wwxWAc96q9FM"/>
+        {/* <Player playbackId="TSsaWDwYOFNH3fIAksOgCG96fRO3UQ9wwxWAc96q9FM"/> */}
 
         <Link href={"/"} className="fixed bottom-4 right-4 flex gap-4 z-40 group">
           <Image
